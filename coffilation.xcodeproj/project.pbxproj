@@ -13,9 +13,13 @@
 		A64BB06E28D68EE5002D8435 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64BB06C28D68EE5002D8435 /* Main.storyboard */; };
 		A64BB07028D68EE6002D8435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64BB06F28D68EE6002D8435 /* Assets.xcassets */; };
 		A64BB07328D68EE6002D8435 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64BB07128D68EE6002D8435 /* LaunchScreen.storyboard */; };
+		BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFC780243477667EFD8147 /* Pods_coffilation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25BA429B37C5C84D36B1DE75 /* Pods-coffilation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffilation.debug.xcconfig"; path = "Target Support Files/Pods-coffilation/Pods-coffilation.debug.xcconfig"; sourceTree = "<group>"; };
+		84BFC780243477667EFD8147 /* Pods_coffilation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_coffilation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B1CA0A1B34667969CD1BED7 /* Pods-coffilation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffilation.release.xcconfig"; path = "Target Support Files/Pods-coffilation/Pods-coffilation.release.xcconfig"; sourceTree = "<group>"; };
 		A64BB06328D68EE5002D8435 /* coffilation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coffilation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64BB06628D68EE5002D8435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A64BB06828D68EE5002D8435 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		652781AB68A1B80754565F80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				25BA429B37C5C84D36B1DE75 /* Pods-coffilation.debug.xcconfig */,
+				9B1CA0A1B34667969CD1BED7 /* Pods-coffilation.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A64BB05A28D68EE5002D8435 = {
 			isa = PBXGroup;
 			children = (
 				A64BB06528D68EE5002D8435 /* coffilation */,
 				A64BB06428D68EE5002D8435 /* Products */,
+				652781AB68A1B80754565F80 /* Pods */,
+				CECBBE7B18392F1F96886D95 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = coffilation;
 			sourceTree = "<group>";
 		};
+		CECBBE7B18392F1F96886D95 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84BFC780243477667EFD8147 /* Pods_coffilation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A64BB07728D68EE6002D8435 /* Build configuration list for PBXNativeTarget "coffilation" */;
 			buildPhases = (
+				A6EC3B6157C1F3B145C691DC /* [CP] Check Pods Manifest.lock */,
 				A64BB05F28D68EE5002D8435 /* Sources */,
 				A64BB06028D68EE5002D8435 /* Frameworks */,
 				A64BB06128D68EE5002D8435 /* Resources */,
@@ -132,6 +158,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A6EC3B6157C1F3B145C691DC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-coffilation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A64BB05F28D68EE5002D8435 /* Sources */ = {
@@ -282,6 +333,7 @@
 		};
 		A64BB07828D68EE6002D8435 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25BA429B37C5C84D36B1DE75 /* Pods-coffilation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +364,7 @@
 		};
 		A64BB07928D68EE6002D8435 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B1CA0A1B34667969CD1BED7 /* Pods-coffilation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
