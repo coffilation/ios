@@ -6,6 +6,5 @@ target 'coffilation' do
   use_frameworks!
 
   # Pods for coffilation
-  pod 'SwiftLint'
 
 end
