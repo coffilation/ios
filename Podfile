@@ -6,5 +6,6 @@ target 'coffilation' do
   use_frameworks!
 
   # Pods for coffilation
+	pod 'PureLayout'
 
 end
