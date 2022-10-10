@@ -12,6 +12,13 @@
 		A64BB07028D68EE6002D8435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64BB06F28D68EE6002D8435 /* Assets.xcassets */; };
 		A64BB07328D68EE6002D8435 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64BB07128D68EE6002D8435 /* LaunchScreen.storyboard */; };
 		A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69AA28F386570048CA15 /* DependencyContainer.swift */; };
+		A66A69AD28F3878B0048CA15 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69AC28F3878B0048CA15 /* LoginViewController.swift */; };
+		A66A69AF28F38DBF0048CA15 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */; };
+		A66A69B128F4B5CC0048CA15 /* AuthScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */; };
+		A66A69B328F4BF690048CA15 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B228F4BF690048CA15 /* AuthManager.swift */; };
+		A66A69B528F4C0DD0048CA15 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B428F4C0DD0048CA15 /* AppCoordinator.swift */; };
+		A66A69B728F4C1170048CA15 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B628F4C1170048CA15 /* Coordinator.swift */; };
+		A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */; };
 		BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFC780243477667EFD8147 /* Pods_coffilation.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +33,13 @@
 		A64BB07228D68EE6002D8435 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A64BB07428D68EE6002D8435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A66A69AA28F386570048CA15 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		A66A69AC28F3878B0048CA15 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenFactory.swift; sourceTree = "<group>"; };
+		A66A69B228F4BF690048CA15 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		A66A69B428F4C0DD0048CA15 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		A66A69B628F4C1170048CA15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +87,13 @@
 				A64BB06628D68EE5002D8435 /* AppDelegate.swift */,
 				A64BB06828D68EE5002D8435 /* SceneDelegate.swift */,
 				A66A69AA28F386570048CA15 /* DependencyContainer.swift */,
+				A66A69B428F4C0DD0048CA15 /* AppCoordinator.swift */,
+				A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */,
+				A66A69B628F4C1170048CA15 /* Coordinator.swift */,
+				A66A69B228F4BF690048CA15 /* AuthManager.swift */,
+				A66A69AC28F3878B0048CA15 /* LoginViewController.swift */,
+				A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */,
+				A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */,
 				A64BB06F28D68EE6002D8435 /* Assets.xcassets */,
 				A64BB07128D68EE6002D8435 /* LaunchScreen.storyboard */,
 				A64BB07428D68EE6002D8435 /* Info.plist */,
@@ -100,6 +121,7 @@
 				A64BB06028D68EE5002D8435 /* Frameworks */,
 				A64BB06128D68EE5002D8435 /* Resources */,
 				A64BB07A28D690EF002D8435 /* Run SwiftLint */,
+				9D1419BF23CFDA370CD4A25A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -156,6 +178,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9D1419BF23CFDA370CD4A25A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-coffilation/Pods-coffilation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-coffilation/Pods-coffilation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-coffilation/Pods-coffilation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A64BB07A28D690EF002D8435 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -205,7 +244,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */,
+				A66A69B328F4BF690048CA15 /* AuthManager.swift in Sources */,
+				A66A69B728F4C1170048CA15 /* Coordinator.swift in Sources */,
+				A66A69AD28F3878B0048CA15 /* LoginViewController.swift in Sources */,
+				A66A69B128F4B5CC0048CA15 /* AuthScreenFactory.swift in Sources */,
+				A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */,
 				A64BB06728D68EE5002D8435 /* AppDelegate.swift in Sources */,
+				A66A69B528F4C0DD0048CA15 /* AppCoordinator.swift in Sources */,
+				A66A69AF28F38DBF0048CA15 /* LoginPresenter.swift in Sources */,
 				A64BB06928D68EE5002D8435 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
