@@ -18,12 +18,15 @@ class LoginViewController: UIViewController {
 		textField.borderStyle = .roundedRect
 		return textField
 	}()
+
 	private let passwordField: UITextField = {
 		let textField = UITextField()
 		textField.backgroundColor = .white
 		textField.borderStyle = .roundedRect
+		textField.isSecureTextEntry = true
 		return textField
 	}()
+
 	private let loginButton: UIButton = {
 		let button = UIButton(type: .system)
 		button.layer.cornerRadius = 16
@@ -38,6 +41,8 @@ class LoginViewController: UIViewController {
 		view.backgroundColor = .lightGray
 
 		setupLayout()
+
+		loginButton.addTarget(self, action: #selector(requestLogin), for: .touchUpInside)
 	}
 
 	init() {
@@ -66,16 +71,27 @@ class LoginViewController: UIViewController {
 	}
 
 	@objc private func requestLogin() {
+		guard let email = emailField.text, let password = passwordField.text else {
+			return
+		}
+		presenter?.performLogin(email: email, password: password)
+	}
 
 	}
 }
 
 extension LoginViewController: LoginViewProtocol {
 	func receivedError(with error: LoginPresenterErrors) {
-
+		let alert = UIAlertController(title: "Failure", message: nil, preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "OK", style: .default)
+		alert.addAction(okAction)
+		present(alert, animated: true)
 	}
 
 	func receivedSuccess() {
-
+		let alert = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "OK", style: .default)
+		alert.addAction(okAction)
+		present(alert, animated: true)
 	}
 }

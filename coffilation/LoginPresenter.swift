@@ -40,6 +40,16 @@ class LoginPresenter: LoginPresenterProtocol {
 	}
 
 	func performLogin(email: String, password: String) {
+		dependencies.authManager.performLogin(email: email, password: password) { [weak self] error in
+			DispatchQueue.main.async {
+				if error != nil {
+					self?.view?.receivedError(with: LoginPresenterErrors.loginError)
+				} else {
+					self?.view?.receivedSuccess()
+				}
+			}
+		}
+	}
 
 	}
 }
