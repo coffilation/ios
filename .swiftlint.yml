@@ -1,5 +1,6 @@
 disabled_rules:
  - vertical_parameter_alignment
+ - empty_enum_arguments
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
