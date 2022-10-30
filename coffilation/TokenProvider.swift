@@ -26,7 +26,6 @@ class TokenProvider: TokenProviderProtocol {
 		static let serviceRefresh = "Refresh"
 	}
 
-
 	func obtainAuthToken() -> String? {
 		return obtainToken(service: Constants.serviceAuth, account: Constants.account)
 	}
@@ -78,7 +77,7 @@ class TokenProvider: TokenProviderProtocol {
 		]
 
 		var itemCopy: AnyObject?
-		let status = SecItemCopyMatching(query as CFDictionary, &itemCopy)
+		_ = SecItemCopyMatching(query as CFDictionary, &itemCopy)
 
 		guard let rawData = itemCopy as? Data,
 			  let token = String(data: rawData, encoding: .utf8) else {
