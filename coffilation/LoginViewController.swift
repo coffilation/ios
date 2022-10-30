@@ -76,8 +76,6 @@ class LoginViewController: UIViewController {
 		}
 		presenter?.performLogin(email: email, password: password)
 	}
-
-	}
 }
 
 extension LoginViewController: LoginViewProtocol {
