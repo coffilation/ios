@@ -20,6 +20,7 @@
 		A66A69B728F4C1170048CA15 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B628F4C1170048CA15 /* Coordinator.swift */; };
 		A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */; };
 		A66A69BB28FC19590048CA15 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69BA28FC19590048CA15 /* RequestBuilder.swift */; };
+		A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */; };
 		A6B58782290749590096BE78 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58781290749590096BE78 /* TokenProvider.swift */; };
 		BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFC780243477667EFD8147 /* Pods_coffilation.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		A66A69B628F4C1170048CA15 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		A66A69BA28FC19590048CA15 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A6B58781290749590096BE78 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 				A66A69B228F4BF690048CA15 /* AuthManager.swift */,
 				A6B58781290749590096BE78 /* TokenProvider.swift */,
 				A66A69BA28FC19590048CA15 /* RequestBuilder.swift */,
+				A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */,
 				A66A69AC28F3878B0048CA15 /* LoginViewController.swift */,
 				A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */,
 				A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */,
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */,
 				A6B58782290749590096BE78 /* TokenProvider.swift in Sources */,
 				A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */,
 				A66A69B328F4BF690048CA15 /* AuthManager.swift in Sources */,
