@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A613116729231B2B0002EACC /* CoffilationColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613116629231B2B0002EACC /* CoffilationColor.swift */; };
+		A61311692923ADDE0002EACC /* CoffilationImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61311682923ADDE0002EACC /* CoffilationImage.swift */; };
 		A64BB06728D68EE5002D8435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BB06628D68EE5002D8435 /* AppDelegate.swift */; };
 		A64BB06928D68EE5002D8435 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BB06828D68EE5002D8435 /* SceneDelegate.swift */; };
 		A64BB07028D68EE6002D8435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64BB06F28D68EE6002D8435 /* Assets.xcassets */; };
@@ -21,6 +23,7 @@
 		A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */; };
 		A66A69BB28FC19590048CA15 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69BA28FC19590048CA15 /* RequestBuilder.swift */; };
 		A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */; };
+		A698A1EA2929663A00DEE788 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1E92929663A00DEE788 /* UITextField+Extension.swift */; };
 		A6B58782290749590096BE78 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58781290749590096BE78 /* TokenProvider.swift */; };
 		A6B58784290CA1E70096BE78 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58783290CA1E70096BE78 /* TokenManager.swift */; };
 		BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFC780243477667EFD8147 /* Pods_coffilation.framework */; };
@@ -30,6 +33,8 @@
 		25BA429B37C5C84D36B1DE75 /* Pods-coffilation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffilation.debug.xcconfig"; path = "Target Support Files/Pods-coffilation/Pods-coffilation.debug.xcconfig"; sourceTree = "<group>"; };
 		84BFC780243477667EFD8147 /* Pods_coffilation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_coffilation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1CA0A1B34667969CD1BED7 /* Pods-coffilation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-coffilation.release.xcconfig"; path = "Target Support Files/Pods-coffilation/Pods-coffilation.release.xcconfig"; sourceTree = "<group>"; };
+		A613116629231B2B0002EACC /* CoffilationColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffilationColor.swift; sourceTree = "<group>"; };
+		A61311682923ADDE0002EACC /* CoffilationImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffilationImage.swift; sourceTree = "<group>"; };
 		A64BB06328D68EE5002D8435 /* coffilation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coffilation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64BB06628D68EE5002D8435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A64BB06828D68EE5002D8435 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +51,7 @@
 		A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		A66A69BA28FC19590048CA15 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A698A1E92929663A00DEE788 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		A6B58781290749590096BE78 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		A6B58783290CA1E70096BE78 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +110,9 @@
 				A66A69BA28FC19590048CA15 /* RequestBuilder.swift */,
 				A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */,
 				A66A69AC28F3878B0048CA15 /* LoginViewController.swift */,
+				A698A1E92929663A00DEE788 /* UITextField+Extension.swift */,
+				A613116629231B2B0002EACC /* CoffilationColor.swift */,
+				A61311682923ADDE0002EACC /* CoffilationImage.swift */,
 				A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */,
 				A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */,
 				A64BB06F28D68EE6002D8435 /* Assets.xcassets */,
@@ -260,6 +269,8 @@
 				A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */,
 				A66A69B328F4BF690048CA15 /* AuthManager.swift in Sources */,
 				A66A69B728F4C1170048CA15 /* Coordinator.swift in Sources */,
+				A613116729231B2B0002EACC /* CoffilationColor.swift in Sources */,
+				A61311692923ADDE0002EACC /* CoffilationImage.swift in Sources */,
 				A66A69AD28F3878B0048CA15 /* LoginViewController.swift in Sources */,
 				A66A69B128F4B5CC0048CA15 /* AuthScreenFactory.swift in Sources */,
 				A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */,
@@ -269,6 +280,7 @@
 				A66A69AF28F38DBF0048CA15 /* LoginPresenter.swift in Sources */,
 				A64BB06928D68EE5002D8435 /* SceneDelegate.swift in Sources */,
 				A6B58784290CA1E70096BE78 /* TokenManager.swift in Sources */,
+				A698A1EA2929663A00DEE788 /* UITextField+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

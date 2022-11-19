@@ -12,37 +12,85 @@ class LoginViewController: UIViewController {
 
 	var presenter: LoginPresenterProtocol?
 
-	private let emailField: UITextField = {
+	private let logoView: UIImageView = {
+		let imageView = UIImageView(image: CoffilationImage.logo)
+		imageView.contentMode = .scaleAspectFit
+		return imageView
+	}()
+
+	private let loginField: UITextField = {
 		let textField = UITextField()
 		textField.backgroundColor = .white
 		textField.borderStyle = .roundedRect
+		textField.layer.cornerRadius = 5
+		textField.layer.borderWidth = 1
+		textField.layer.borderColor = UIColor.grey2.cgColor
+		let profileImageView = UIImageView(image: CoffilationImage.profile)
+		profileImageView.tintColor = .darkGray
+		profileImageView.contentMode = .scaleAspectFit
+		textField.setLeftView(with: profileImageView, insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0))
+		textField.attributedPlaceholder = NSAttributedString(
+			string: "Никнейм",
+			attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
 		return textField
 	}()
 
 	private let passwordField: UITextField = {
 		let textField = UITextField()
+		textField.isSecureTextEntry = true
 		textField.backgroundColor = .white
 		textField.borderStyle = .roundedRect
-		textField.isSecureTextEntry = true
+		textField.layer.cornerRadius = 5
+		textField.layer.borderWidth = 1
+		textField.layer.borderColor = UIColor.grey2.cgColor
+		let lockImageView = UIImageView(image: CoffilationImage.lock)
+		lockImageView.tintColor = .darkGray
+		lockImageView.contentMode = .scaleAspectFit
+		textField.setLeftView(with: lockImageView, insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0))
+		textField.attributedPlaceholder = NSAttributedString(
+			string: "Пароль",
+			attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
 		return textField
 	}()
 
 	private let loginButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.layer.cornerRadius = 16
-		button.backgroundColor = .blue
-		button.setTitle("LOGIN", for: .normal)
+		button.layer.cornerRadius = 5
+		button.backgroundColor = .mainColor
+		button.tintColor = .defaultButtonText
+		button.setTitle("Вход", for: .normal)
+		button.setTitleColor(.defaultButtonText, for: .normal)
+		button.setImage(CoffilationImage.login, for: .normal)
+		button.imageEdgeInsets.left = -8
 		return button
 	}()
+
+	private let registerButton: UIButton = {
+		let button = UIButton(type: .system)
+		let title = NSMutableAttributedString(string: "Нет аккаунта? ",
+											  attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray.cgColor])
+		let secondPartTitle = NSAttributedString(string: "Регистрация",
+												 attributes: [NSAttributedString.Key.foregroundColor: UIColor.mainColor.cgColor])
+		title.append(secondPartTitle)
+		button.setAttributedTitle(title, for: .normal)
+		return button
+	}()
+
+	private let scrollView: UIScrollView = {
+		let scroll = UIScrollView()
+		scroll.delaysContentTouches = false
+		return scroll
+	}()
+
+	private let containerView = UIView()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		view.backgroundColor = .lightGray
+		view.backgroundColor = .defaultBackground
 
 		setupLayout()
-
-		loginButton.addTarget(self, action: #selector(requestLogin), for: .touchUpInside)
+		setupActions()
 	}
 
 	init() {
@@ -53,25 +101,55 @@ class LoginViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+	private func setupActions() {
+		loginButton.addTarget(self, action: #selector(requestLogin), for: .touchUpInside)
+
+		let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+		tap.cancelsTouchesInView = false
+		view.addGestureRecognizer(tap)
+	}
+
 	private func setupLayout() {
-		view.addSubview(emailField)
-		view.addSubview(passwordField)
-		view.addSubview(loginButton)
+		view.addSubview(scrollView)
+		scrollView.autoPinEdgesToSuperviewSafeArea(with: .zero, excludingEdge: .bottom)
+		scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor).isActive = true
 
-		loginButton.autoCenterInSuperview()
-		loginButton.autoSetDimensions(to: CGSize(width: 160, height: 48))
-		loginButton.autoPinEdge(.top, to: .bottom, of: passwordField, withOffset: 12)
+		scrollView.addSubview(containerView)
+		containerView.autoMatch(.width, to: .width, of: scrollView, withOffset: -32, relation: .equal)
+		containerView.autoCenterInSuperview()
+		containerView.setContentHuggingPriority(.defaultLow, for: .vertical)
+		containerView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 
-		passwordField.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
-		passwordField.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
-		passwordField.autoPinEdge(.top, to: .bottom, of: emailField, withOffset: 12)
+		containerView.addSubview(logoView)
+		containerView.addSubview(loginField)
+		containerView.addSubview(passwordField)
+		containerView.addSubview(loginButton)
+		containerView.addSubview(registerButton)
 
-		emailField.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
-		emailField.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
+		logoView.autoPinEdge(toSuperviewEdge: .top)
+		logoView.autoAlignAxis(toSuperviewAxis: .vertical)
+
+		loginField.autoPinEdge(.top, to: .bottom, of: logoView, withOffset: 56)
+		loginField.autoPinEdge(toSuperviewEdge: .leading)
+		loginField.autoPinEdge(toSuperviewEdge: .trailing)
+		loginField.autoSetDimension(.height, toSize: 48)
+
+		passwordField.autoPinEdge(.top, to: .bottom, of: loginField, withOffset: 24)
+		passwordField.autoPinEdge(toSuperviewEdge: .leading)
+		passwordField.autoPinEdge(toSuperviewEdge: .trailing)
+		passwordField.autoSetDimension(.height, toSize: 48)
+
+		loginButton.autoPinEdge(.top, to: .bottom, of: passwordField, withOffset: 56)
+		loginButton.autoPinEdge(toSuperviewEdge: .leading)
+		loginButton.autoPinEdge(toSuperviewEdge: .trailing)
+		loginButton.autoSetDimension(.height, toSize: 48)
+
+		registerButton.autoPinEdge(.top, to: .bottom, of: loginButton, withOffset: 16)
+		registerButton.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0), excludingEdge: .top)
 	}
 
 	@objc private func requestLogin() {
-		guard let email = emailField.text, let password = passwordField.text else {
+		guard let email = loginField.text, let password = passwordField.text else {
 			return
 		}
 		presenter?.performLogin(email: email, password: password)
