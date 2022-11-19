@@ -7,5 +7,6 @@ target 'coffilation' do
 
   # Pods for coffilation
 	pod 'PureLayout'
+	pod 'UBottomSheet'
 
 end
