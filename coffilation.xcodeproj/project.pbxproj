@@ -98,28 +98,76 @@
 		A64BB06528D68EE5002D8435 /* coffilation */ = {
 			isa = PBXGroup;
 			children = (
+				A698A1EE29296B3000DEE788 /* Services */,
+				A698A1ED29296AD400DEE788 /* AuthScreen */,
+				A698A1EB29296A1F00DEE788 /* Common */,
+			);
+			path = coffilation;
+			sourceTree = "<group>";
+		};
+		A698A1EB29296A1F00DEE788 /* Common */ = {
+			isa = PBXGroup;
+			children = (
 				A64BB06628D68EE5002D8435 /* AppDelegate.swift */,
-				A64BB06828D68EE5002D8435 /* SceneDelegate.swift */,
-				A66A69AA28F386570048CA15 /* DependencyContainer.swift */,
 				A66A69B428F4C0DD0048CA15 /* AppCoordinator.swift */,
-				A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */,
 				A66A69B628F4C1170048CA15 /* Coordinator.swift */,
-				A66A69B228F4BF690048CA15 /* AuthManager.swift */,
-				A6B58783290CA1E70096BE78 /* TokenManager.swift */,
-				A6B58781290749590096BE78 /* TokenProvider.swift */,
-				A66A69BA28FC19590048CA15 /* RequestBuilder.swift */,
-				A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */,
-				A66A69AC28F3878B0048CA15 /* LoginViewController.swift */,
-				A698A1E92929663A00DEE788 /* UITextField+Extension.swift */,
 				A613116629231B2B0002EACC /* CoffilationColor.swift */,
 				A61311682923ADDE0002EACC /* CoffilationImage.swift */,
-				A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */,
-				A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */,
+				A64BB06828D68EE5002D8435 /* SceneDelegate.swift */,
 				A64BB06F28D68EE6002D8435 /* Assets.xcassets */,
 				A64BB07128D68EE6002D8435 /* LaunchScreen.storyboard */,
 				A64BB07428D68EE6002D8435 /* Info.plist */,
+				A698A1EC29296A2800DEE788 /* Extensions */,
 			);
-			path = coffilation;
+			path = Common;
+			sourceTree = "<group>";
+		};
+		A698A1EC29296A2800DEE788 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A698A1E92929663A00DEE788 /* UITextField+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A698A1ED29296AD400DEE788 /* AuthScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A66A69B828F4C19C0048CA15 /* AuthCoordinator.swift */,
+				A66A69B028F4B5CC0048CA15 /* AuthScreenFactory.swift */,
+				A66A69AC28F3878B0048CA15 /* LoginViewController.swift */,
+				A66A69AE28F38DBF0048CA15 /* LoginPresenter.swift */,
+			);
+			path = AuthScreen;
+			sourceTree = "<group>";
+		};
+		A698A1EE29296B3000DEE788 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A66A69AA28F386570048CA15 /* DependencyContainer.swift */,
+				A698A1F029296B8900DEE788 /* Auth */,
+				A698A1EF29296B3600DEE788 /* Networking */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A698A1EF29296B3600DEE788 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */,
+				A66A69BA28FC19590048CA15 /* RequestBuilder.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A698A1F029296B8900DEE788 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A66A69B228F4BF690048CA15 /* AuthManager.swift */,
+				A6B58783290CA1E70096BE78 /* TokenManager.swift */,
+				A6B58781290749590096BE78 /* TokenProvider.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		CECBBE7B18392F1F96886D95 /* Frameworks */ = {
@@ -422,7 +470,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N36M22CA6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = coffilation/Info.plist;
+				INFOPLIST_FILE = coffilation/Common/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -451,7 +499,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9N36M22CA6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = coffilation/Info.plist;
+				INFOPLIST_FILE = coffilation/Common/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
