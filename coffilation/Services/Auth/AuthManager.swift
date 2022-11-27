@@ -77,8 +77,11 @@ class AuthManager: AuthManagerProtocol {
 				self?.lock.unlock()
 				completion(.success(success))
 			case .failure(let failure as NetworkError):
-				if failure == .notAuthorized {
+				if failure == .notAuthorized, self?.needRefreshRequests[request] == nil {
 					self?.tokenManager.updateToken()
+				} else {
+					self?.needRefreshRequests[request] = nil
+					completion(.failure(failure))
 				}
 			case .failure(let failure):
 				self?.lock.lock()
