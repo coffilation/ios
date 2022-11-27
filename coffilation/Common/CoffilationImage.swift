@@ -17,4 +17,6 @@ struct CoffilationImage {
 	static let profile = UIImage(named: "ProfileIcon")
 
 	static let hidePassword = UIImage(named: "HidePasswordIcon")
+
+	static let search = UIImage(named: "SearchIcon")
 }
