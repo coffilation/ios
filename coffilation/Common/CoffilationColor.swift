@@ -17,4 +17,6 @@ extension UIColor {
 	static let defaultBackground = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
 
 	static let defaultButtonText = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+
+	static let coffiLightGray = UIColor(red: 247/255, green: 248/255, blue: 248/255, alpha: 1)
 }
