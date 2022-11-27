@@ -29,7 +29,7 @@ class AppCoordinator {
 	}
 
 	private func setupStarterCoordinator() {
-		starterCoordinator = AuthCoordinator(navigationController: navigationController, dependencies: dependencies)
+		starterCoordinator = MapCoordinator(navigationController: navigationController, dependencies: dependencies)
 	}
 
 	func start() {

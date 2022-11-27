@@ -24,6 +24,16 @@
 		A66A69BB28FC19590048CA15 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69BA28FC19590048CA15 /* RequestBuilder.swift */; };
 		A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */; };
 		A698A1EA2929663A00DEE788 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1E92929663A00DEE788 /* UITextField+Extension.swift */; };
+		A698A1F3292973BE00DEE788 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1F2292973BE00DEE788 /* MapCoordinator.swift */; };
+		A698A1F5292973C800DEE788 /* MapScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1F4292973C800DEE788 /* MapScreenFactory.swift */; };
+		A698A1F7292973DB00DEE788 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1F6292973DB00DEE788 /* MapViewController.swift */; };
+		A698A1F9292973F300DEE788 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1F8292973F300DEE788 /* MapPresenter.swift */; };
+		A698A1FB2932568800DEE788 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1FA2932568800DEE788 /* UIView+Extension.swift */; };
+		A698A1FE2932577E00DEE788 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1FD2932577E00DEE788 /* MainMenuViewController.swift */; };
+		A698A2002932579A00DEE788 /* MainMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A1FF2932579A00DEE788 /* MainMenuPresenter.swift */; };
+		A698A202293257C900DEE788 /* MainMenuScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A201293257C900DEE788 /* MainMenuScreenFactory.swift */; };
+		A698A2042932586400DEE788 /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A2032932586400DEE788 /* MainMenuCoordinator.swift */; };
+		A698A2062932676100DEE788 /* MapBottomSheetDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A2052932676100DEE788 /* MapBottomSheetDataSource.swift */; };
 		A6B58782290749590096BE78 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58781290749590096BE78 /* TokenProvider.swift */; };
 		A6B58784290CA1E70096BE78 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58783290CA1E70096BE78 /* TokenManager.swift */; };
 		BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFC780243477667EFD8147 /* Pods_coffilation.framework */; };
@@ -52,6 +62,16 @@
 		A66A69BA28FC19590048CA15 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		A66A69BC28FC1B2F0048CA15 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A698A1E92929663A00DEE788 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		A698A1F2292973BE00DEE788 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		A698A1F4292973C800DEE788 /* MapScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenFactory.swift; sourceTree = "<group>"; };
+		A698A1F6292973DB00DEE788 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A698A1F8292973F300DEE788 /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		A698A1FA2932568800DEE788 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		A698A1FD2932577E00DEE788 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		A698A1FF2932579A00DEE788 /* MainMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuPresenter.swift; sourceTree = "<group>"; };
+		A698A201293257C900DEE788 /* MainMenuScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScreenFactory.swift; sourceTree = "<group>"; };
+		A698A2032932586400DEE788 /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
+		A698A2052932676100DEE788 /* MapBottomSheetDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBottomSheetDataSource.swift; sourceTree = "<group>"; };
 		A6B58781290749590096BE78 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		A6B58783290CA1E70096BE78 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				A698A1EE29296B3000DEE788 /* Services */,
+				A698A1FC2932575C00DEE788 /* MainMenuScreen */,
+				A698A1F1292973A900DEE788 /* MapScreen */,
 				A698A1ED29296AD400DEE788 /* AuthScreen */,
 				A698A1EB29296A1F00DEE788 /* Common */,
 			);
@@ -126,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				A698A1E92929663A00DEE788 /* UITextField+Extension.swift */,
+				A698A1FA2932568800DEE788 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,6 +191,29 @@
 				A6B58781290749590096BE78 /* TokenProvider.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		A698A1F1292973A900DEE788 /* MapScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A698A1F2292973BE00DEE788 /* MapCoordinator.swift */,
+				A698A1F4292973C800DEE788 /* MapScreenFactory.swift */,
+				A698A1F6292973DB00DEE788 /* MapViewController.swift */,
+				A698A1F8292973F300DEE788 /* MapPresenter.swift */,
+				A698A2052932676100DEE788 /* MapBottomSheetDataSource.swift */,
+			);
+			path = MapScreen;
+			sourceTree = "<group>";
+		};
+		A698A1FC2932575C00DEE788 /* MainMenuScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A698A2032932586400DEE788 /* MainMenuCoordinator.swift */,
+				A698A201293257C900DEE788 /* MainMenuScreenFactory.swift */,
+				A698A1FD2932577E00DEE788 /* MainMenuViewController.swift */,
+				A698A1FF2932579A00DEE788 /* MainMenuPresenter.swift */,
+			);
+			path = MainMenuScreen;
 			sourceTree = "<group>";
 		};
 		CECBBE7B18392F1F96886D95 /* Frameworks */ = {
@@ -312,20 +358,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A698A1FB2932568800DEE788 /* UIView+Extension.swift in Sources */,
 				A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */,
 				A6B58782290749590096BE78 /* TokenProvider.swift in Sources */,
 				A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */,
+				A698A1F7292973DB00DEE788 /* MapViewController.swift in Sources */,
 				A66A69B328F4BF690048CA15 /* AuthManager.swift in Sources */,
 				A66A69B728F4C1170048CA15 /* Coordinator.swift in Sources */,
 				A613116729231B2B0002EACC /* CoffilationColor.swift in Sources */,
 				A61311692923ADDE0002EACC /* CoffilationImage.swift in Sources */,
+				A698A1F9292973F300DEE788 /* MapPresenter.swift in Sources */,
+				A698A2042932586400DEE788 /* MainMenuCoordinator.swift in Sources */,
 				A66A69AD28F3878B0048CA15 /* LoginViewController.swift in Sources */,
+				A698A1FE2932577E00DEE788 /* MainMenuViewController.swift in Sources */,
+				A698A2002932579A00DEE788 /* MainMenuPresenter.swift in Sources */,
 				A66A69B128F4B5CC0048CA15 /* AuthScreenFactory.swift in Sources */,
+				A698A2062932676100DEE788 /* MapBottomSheetDataSource.swift in Sources */,
+				A698A1F3292973BE00DEE788 /* MapCoordinator.swift in Sources */,
 				A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */,
 				A64BB06728D68EE5002D8435 /* AppDelegate.swift in Sources */,
+				A698A202293257C900DEE788 /* MainMenuScreenFactory.swift in Sources */,
 				A66A69BB28FC19590048CA15 /* RequestBuilder.swift in Sources */,
 				A66A69B528F4C0DD0048CA15 /* AppCoordinator.swift in Sources */,
 				A66A69AF28F38DBF0048CA15 /* LoginPresenter.swift in Sources */,
+				A698A1F5292973C800DEE788 /* MapScreenFactory.swift in Sources */,
 				A64BB06928D68EE5002D8435 /* SceneDelegate.swift in Sources */,
 				A6B58784290CA1E70096BE78 /* TokenManager.swift in Sources */,
 				A698A1EA2929663A00DEE788 /* UITextField+Extension.swift in Sources */,
