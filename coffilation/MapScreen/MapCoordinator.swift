@@ -29,4 +29,14 @@ class MapCoordinator: Coordinator {
 	}
 }
 
-extension MapCoordinator: MapNavigationDelegateProtocol {}
+extension MapCoordinator: MapNavigationDelegateProtocol {
+	func createBottomSheetScreen() -> MainMenuViewController? {
+		MainMenuScreenFactory().makeMainMenuScreen(with: dependencies, delegate: self)
+	}
+}
+
+extension MapCoordinator: MainMenuNavigationDelegate {
+	func showNewScreen(with viewController: UIViewController) {
+		navigationController.pushViewController(viewController, animated: true)
+	}
+}

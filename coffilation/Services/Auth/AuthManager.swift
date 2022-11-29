@@ -45,7 +45,7 @@ class AuthManager: AuthManagerProtocol {
 	func performLogin(email: String, password: String, completion: @escaping (AuthError?) -> Void) {
 		let body = AuthLoginRequestModel(username: email, password: password)
 
-		guard let request = try? RequestBuilder(path: "auth/login")
+		guard let request = try? RequestBuilder(path: "/auth/login")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")
 			.httpJSONBody(body)
@@ -108,11 +108,12 @@ extension AuthManager: TokenManagerDelegate {
 			networkManager.retryRequest(for: enrichedRequest,
 										completion: requestTuple.value)
 		}
-		needRefreshRequests = [:]
 		lock.unlock()
 	}
 
 	func didReceiveTokenUpdateError() {
+		lock.lock()
 		needRefreshRequests = [:]
+		lock.unlock()
 	}
 }

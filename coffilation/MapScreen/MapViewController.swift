@@ -70,15 +70,17 @@ class MapViewController: UIViewController {
 												   delegate: self)
 		sheetCoordinator?.dataSource = mapDataSource
 
-		let vc = UIViewController()
-		vc.view.backgroundColor = .green
-		sheetCoordinator?.addSheet(vc, to: self, didContainerCreate: { container in
+		guard var menu = presenter?.createBottomSheetScreen() as? DraggableItem else {
+			return
+		}
+		menu.sheetCoordinator = sheetCoordinator
+		sheetCoordinator?.addSheet(menu, to: self, didContainerCreate: { container in
 			let frame = self.view.frame
 			let rect = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
 			container.roundCorners(corners: [.topLeft, .topRight], radius: 10, rect: rect)
 		})
 		sheetCoordinator?.setCornerRadius(10)
-		sheetCoordinator?.startTracking(item: self)
+//		sheetCoordinator?.startTracking(item: self)
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -130,7 +132,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController: UBottomSheetCoordinatorDelegate {}
 
-extension MapViewController: Draggable {}
+//extension MapViewController: Draggable {}
 
 extension MapViewController: MapViewProtocol {}
 

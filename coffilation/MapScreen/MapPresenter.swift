@@ -9,9 +9,13 @@ import Foundation
 
 protocol MapViewProtocol: AnyObject {}
 
-protocol MapNavigationDelegateProtocol: AnyObject {}
+protocol MapNavigationDelegateProtocol: AnyObject {
+	func createBottomSheetScreen() -> MainMenuViewController?
+}
 
-protocol MapPresenterProtocol {}
+protocol MapPresenterProtocol {
+	func createBottomSheetScreen() -> MainMenuViewController?
+}
 
 class MapPresenter: MapPresenterProtocol {
 
@@ -21,5 +25,9 @@ class MapPresenter: MapPresenterProtocol {
 	init(view: MapViewProtocol?, navigationDelegate: MapNavigationDelegateProtocol? = nil) {
 		self.view = view
 		self.navigationDelegate = navigationDelegate
+	}
+
+	func createBottomSheetScreen() -> MainMenuViewController? {
+		navigationDelegate?.createBottomSheetScreen()
 	}
 }

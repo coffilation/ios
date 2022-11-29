@@ -23,14 +23,26 @@ protocol HasTokenManager {
 	var tokenManager: TokenManagerProtocol { get set }
 }
 
+protocol HasUserNetworkManager {
+	var userNetworkManager: UserNetworkManagerProtocol { get set }
+}
+
+protocol HasCollectionNetworkManager {
+	var collectionNetworkManager: CollectionsNetworkManagerProtocol { get set}
+}
+
 protocol DependencyContainerProtocol: HasAuthManager,
 									  HasNetworkManager,
 									  HasTokenProvider,
-									  HasTokenManager {}
+									  HasTokenManager,
+									  HasUserNetworkManager,
+									  HasCollectionNetworkManager {}
 
 final class DependencyContainer: DependencyContainerProtocol {
 	var authManager: AuthManagerProtocol
 	var tokenManager: TokenManagerProtocol
+	var userNetworkManager: UserNetworkManagerProtocol
+	var collectionNetworkManager: CollectionsNetworkManagerProtocol
 
 	var networkManager: NetworkManagerProtocol = NetworkManager()
 	var tokenProvider: TokenProviderProtocol = TokenProvider()
@@ -41,5 +53,9 @@ final class DependencyContainer: DependencyContainerProtocol {
 		let authManager = AuthManager(networkManager: networkManager, tokenManager: tokenManager)
 		self.authManager = authManager
 		tokenManager.delegate = authManager
+		let userNetworkManager = UserNetworkManager(authManager: authManager)
+		self.userNetworkManager = userNetworkManager
+		let collectionNetworkManager = CollectionsNetworkManager(authManager: authManager, networkManager: networkManager)
+		self.collectionNetworkManager = collectionNetworkManager
 	}
 }
