@@ -110,6 +110,7 @@ class LoginViewController: UIViewController {
 	}
 
 	private func setupLayout() {
+		navigationItem.setHidesBackButton(true, animated: true)
 		view.addSubview(scrollView)
 		scrollView.autoPinEdgesToSuperviewSafeArea(with: .zero, excludingEdge: .bottom)
 		scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor).isActive = true
@@ -159,15 +160,12 @@ class LoginViewController: UIViewController {
 extension LoginViewController: LoginViewProtocol {
 	func receivedError(with error: LoginPresenterErrors) {
 		let alert = UIAlertController(title: "Failure", message: nil, preferredStyle: .alert)
-		let okAction = UIAlertAction(title: "OK", style: .default)
+		let okAction = UIAlertAction(title: "Try again", style: .default)
 		alert.addAction(okAction)
 		present(alert, animated: true)
 	}
 
 	func receivedSuccess() {
-		let alert = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
-		let okAction = UIAlertAction(title: "OK", style: .default)
-		alert.addAction(okAction)
-		present(alert, animated: true)
+		navigationController?.popViewController(animated: true)
 	}
 }

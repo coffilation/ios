@@ -13,25 +13,31 @@ class MapCoordinator: Coordinator {
 
 	private let dependencies: DependencyContainerProtocol
 
+	private lazy var authCoordinator = AuthCoordinator(navigationController: navigationController, dependencies: dependencies)
+
+	private var mainMenuViewController: MainMenuViewController?
+
 	init(navigationController: UINavigationController = UINavigationController(), dependencies: DependencyContainerProtocol) {
 		self.navigationController = navigationController
 		self.dependencies = dependencies
 	}
 
-	private func showMapScreen() {
+	func start() {
 		let screen = MapScreenFactory.makeMapScreen(delegate: self)
 		screen.loadViewIfNeeded()
-		navigationController.pushViewController(screen, animated: false)
-	}
-
-	func start() {
-		showMapScreen()
+		if navigationController.viewControllers.count <= 1 {
+			navigationController.viewControllers.append(screen)
+		} else {
+			navigationController.viewControllers.insert(screen, at: 1)
+		}
+		navigationController.popToViewController(screen, animated: true)
 	}
 }
 
 extension MapCoordinator: MapNavigationDelegateProtocol {
 	func createBottomSheetScreen() -> MainMenuViewController? {
-		MainMenuScreenFactory().makeMainMenuScreen(with: dependencies, delegate: self)
+		mainMenuViewController = MainMenuScreenFactory().makeMainMenuScreen(with: dependencies, delegate: self)
+		return mainMenuViewController
 	}
 }
 

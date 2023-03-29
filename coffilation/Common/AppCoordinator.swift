@@ -29,7 +29,7 @@ class AppCoordinator {
 	}
 
 	private func setupStarterCoordinator() {
-		starterCoordinator = MapCoordinator(navigationController: navigationController, dependencies: dependencies)
+		starterCoordinator = SplashScreenCoordinator(navigationController: navigationController, dependencies: dependencies)
 	}
 
 	func start() {

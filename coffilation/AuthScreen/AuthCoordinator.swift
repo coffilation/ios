@@ -8,10 +8,16 @@
 import Foundation
 import UIKit
 
+protocol AuthCoordinatorDelegate: AnyObject {
+	func didLogin()
+}
+
 class AuthCoordinator: Coordinator {
 	private let navigationController: UINavigationController
 
 	private let dependencies: DependencyContainerProtocol
+
+	weak var delegate: AuthCoordinatorDelegate?
 
 	init(navigationController: UINavigationController = UINavigationController(), dependencies: DependencyContainerProtocol) {
 		self.navigationController = navigationController
@@ -32,5 +38,9 @@ class AuthCoordinator: Coordinator {
 extension AuthCoordinator: LoginNavigationDelegate {
 	func didTapRegister() {
 
+	}
+
+	func didLogin() {
+		delegate?.didLogin()
 	}
 }

@@ -41,6 +41,11 @@
 		A698A2122935C07500DEE788 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A2112935C07500DEE788 /* CollectionTableViewCell.swift */; };
 		A6B58782290749590096BE78 /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58781290749590096BE78 /* TokenProvider.swift */; };
 		A6B58784290CA1E70096BE78 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B58783290CA1E70096BE78 /* TokenManager.swift */; };
+		A6BE7E4329D3A1BA0048838B /* AtomicPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE7E4229D3A1BA0048838B /* AtomicPropertyWrapper.swift */; };
+		A6BE7E4629D3B0080048838B /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE7E4529D3B0080048838B /* SplashScreenViewController.swift */; };
+		A6BE7E4829D3B0120048838B /* SplashScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE7E4729D3B0120048838B /* SplashScreenPresenter.swift */; };
+		A6BE7E4A29D3B0210048838B /* SplashScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE7E4929D3B0210048838B /* SplashScreenCoordinator.swift */; };
+		A6BE7E4C29D3B02D0048838B /* SplashScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE7E4B29D3B02D0048838B /* SplashScreenFactory.swift */; };
 		BE2BE15FDFFCF427F0FB76DB /* Pods_coffilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84BFC780243477667EFD8147 /* Pods_coffilation.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +89,11 @@
 		A698A2112935C07500DEE788 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		A6B58781290749590096BE78 /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		A6B58783290CA1E70096BE78 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		A6BE7E4229D3A1BA0048838B /* AtomicPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicPropertyWrapper.swift; sourceTree = "<group>"; };
+		A6BE7E4529D3B0080048838B /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		A6BE7E4729D3B0120048838B /* SplashScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenPresenter.swift; sourceTree = "<group>"; };
+		A6BE7E4929D3B0210048838B /* SplashScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenCoordinator.swift; sourceTree = "<group>"; };
+		A6BE7E4B29D3B02D0048838B /* SplashScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				A698A1EE29296B3000DEE788 /* Services */,
+				A6BE7E4429D3AFE60048838B /* SplashScreen */,
 				A698A1FC2932575C00DEE788 /* MainMenuScreen */,
 				A698A1F1292973A900DEE788 /* MapScreen */,
 				A698A1ED29296AD400DEE788 /* AuthScreen */,
@@ -140,6 +151,7 @@
 		A698A1EB29296A1F00DEE788 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A6BE7E4129D3A1A20048838B /* Tools */,
 				A64BB06628D68EE5002D8435 /* AppDelegate.swift */,
 				A66A69B428F4C0DD0048CA15 /* AppCoordinator.swift */,
 				A66A69B628F4C1170048CA15 /* Coordinator.swift */,
@@ -245,6 +257,25 @@
 				A698A2112935C07500DEE788 /* CollectionTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A6BE7E4129D3A1A20048838B /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				A6BE7E4229D3A1BA0048838B /* AtomicPropertyWrapper.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		A6BE7E4429D3AFE60048838B /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A6BE7E4529D3B0080048838B /* SplashScreenViewController.swift */,
+				A6BE7E4729D3B0120048838B /* SplashScreenPresenter.swift */,
+				A6BE7E4929D3B0210048838B /* SplashScreenCoordinator.swift */,
+				A6BE7E4B29D3B02D0048838B /* SplashScreenFactory.swift */,
+			);
+			path = SplashScreen;
 			sourceTree = "<group>";
 		};
 		CECBBE7B18392F1F96886D95 /* Frameworks */ = {
@@ -390,8 +421,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A698A20D2933A13C00DEE788 /* CollectionsNetworkManager.swift in Sources */,
+				A6BE7E4329D3A1BA0048838B /* AtomicPropertyWrapper.swift in Sources */,
 				A698A1FB2932568800DEE788 /* UIView+Extension.swift in Sources */,
 				A698A2102935C04900DEE788 /* DiscoveryCollectionViewCell.swift in Sources */,
+				A6BE7E4629D3B0080048838B /* SplashScreenViewController.swift in Sources */,
 				A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */,
 				A6B58782290749590096BE78 /* TokenProvider.swift in Sources */,
 				A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */,
@@ -402,6 +435,8 @@
 				A66A69B728F4C1170048CA15 /* Coordinator.swift in Sources */,
 				A613116729231B2B0002EACC /* CoffilationColor.swift in Sources */,
 				A61311692923ADDE0002EACC /* CoffilationImage.swift in Sources */,
+				A6BE7E4A29D3B0210048838B /* SplashScreenCoordinator.swift in Sources */,
+				A6BE7E4829D3B0120048838B /* SplashScreenPresenter.swift in Sources */,
 				A698A1F9292973F300DEE788 /* MapPresenter.swift in Sources */,
 				A698A2042932586400DEE788 /* MainMenuCoordinator.swift in Sources */,
 				A66A69AD28F3878B0048CA15 /* LoginViewController.swift in Sources */,
@@ -413,6 +448,7 @@
 				A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */,
 				A64BB06728D68EE5002D8435 /* AppDelegate.swift in Sources */,
 				A698A202293257C900DEE788 /* MainMenuScreenFactory.swift in Sources */,
+				A6BE7E4C29D3B02D0048838B /* SplashScreenFactory.swift in Sources */,
 				A698A20B2933A13200DEE788 /* UserNetworkManager.swift in Sources */,
 				A66A69BB28FC19590048CA15 /* RequestBuilder.swift in Sources */,
 				A66A69B528F4C0DD0048CA15 /* AppCoordinator.swift in Sources */,
@@ -488,7 +524,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -542,7 +578,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -567,7 +603,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -596,7 +632,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

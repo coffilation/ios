@@ -19,6 +19,7 @@ protocol LoginViewProtocol: AnyObject {
 
 protocol LoginNavigationDelegate: AnyObject {
 	func didTapRegister()
+	func didLogin()
 }
 
 protocol LoginPresenterProtocol {
@@ -46,6 +47,7 @@ class LoginPresenter: LoginPresenterProtocol {
 					self?.view?.receivedError(with: LoginPresenterErrors.loginError)
 				} else {
 					self?.view?.receivedSuccess()
+					self?.navigationDelegate?.didLogin()
 				}
 			}
 		}
