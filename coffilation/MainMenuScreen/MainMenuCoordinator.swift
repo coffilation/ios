@@ -9,8 +9,6 @@ import Foundation
 
 class MainMenuCoordinator: Coordinator {
 
-	
-
 	func start() {
 		
 	}

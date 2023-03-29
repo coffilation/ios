@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
 	private let mapDataSource = MapBottomSheetDataSource()
 	private var locationManager: CLLocationManager?
 	private var userLocation: CLLocation?
+	private var userCurrentRegion: MKCoordinateRegion?
 
 	private let mapView: MKMapView = {
 		let map = MKMapView()
@@ -80,7 +81,6 @@ class MapViewController: UIViewController {
 			container.roundCorners(corners: [.topLeft, .topRight], radius: 10, rect: rect)
 		})
 		sheetCoordinator?.setCornerRadius(10)
-//		sheetCoordinator?.startTracking(item: self)
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -110,16 +110,19 @@ class MapViewController: UIViewController {
 
 	private func setupActions() {
 		zoomInButton.addTarget(self, action: #selector(zoomInAction), for: .touchUpInside)
+		zoomOutButton.addTarget(self, action: #selector(zoomOutAction), for: .touchUpInside)
 		locationButton.addTarget(self, action: #selector(locateToUserLocation), for: .touchUpInside)
 	}
 
 	@objc private func locateToUserLocation() {
-		let status = locationManager?.authorizationStatus
-		if status == .authorizedAlways || status == .authorizedWhenInUse {
-			locationManager?.requestLocation()
-		} else if status == .notDetermined {
-			locationManager?.requestWhenInUseAuthorization()
-		}
+//		let status = locationManager?.authorizationStatus
+//		if status == .authorizedAlways || status == .authorizedWhenInUse {
+//			locationManager?.requestLocation()
+//		} else if status == .notDetermined {
+//			locationManager?.requestWhenInUseAuthorization()
+//		}
+		guard let userCurrentRegion else { return }
+		mapView.setRegion(userCurrentRegion, animated: true)
 	}
 
 	@objc private func zoomInAction() {
@@ -128,11 +131,16 @@ class MapViewController: UIViewController {
 		region.span.longitudeDelta *= 0.25
 		mapView.setRegion(region, animated: true)
 	}
+
+	@objc private func zoomOutAction() {
+		var region = mapView.region
+		region.span.latitudeDelta /= 0.25
+		region.span.longitudeDelta /= 0.25
+		mapView.setRegion(region, animated: true)
+	}
 }
 
 extension MapViewController: UBottomSheetCoordinatorDelegate {}
-
-//extension MapViewController: Draggable {}
 
 extension MapViewController: MapViewProtocol {}
 
@@ -159,7 +167,7 @@ extension MapViewController: CLLocationManagerDelegate {
 
 		let coordinate = latest.coordinate
 		let region = MKCoordinateRegion(center: coordinate, span: .init(latitudeDelta: 0.025, longitudeDelta: 0.025))
-		mapView.setRegion(region, animated: true)
+		userCurrentRegion = region
 	}
 
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

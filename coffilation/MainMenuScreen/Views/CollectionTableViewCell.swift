@@ -49,6 +49,7 @@ class CollectionTableViewCell: UITableViewCell {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		collectionAvatarImage.roundCorners(corners: .allCorners, radius: 8, rect: collectionAvatarImage.bounds)
+		gradient?.frame = collectionAvatarImage.bounds
 	}
 
 	private func setupLayout() {
@@ -75,6 +76,7 @@ class CollectionTableViewCell: UITableViewCell {
 		descriptionLabel.text = description
 		let collectionName = name ?? "?"
 		collectionAvatarLabel.text = collectionName.prefix(1).capitalized
+		self.gradient?.removeFromSuperlayer()
 		self.gradient = nil
 		if name == nil {
 			collectionAvatarImage.start()
@@ -86,6 +88,7 @@ class CollectionTableViewCell: UITableViewCell {
 				self.gradient = collectionAvatarImage.addGradient(colors: UIColor.orangeGradient)
 			}
 		}
+		collectionAvatarImage.bringSubviewToFront(collectionAvatarLabel)
 	}
 }
 

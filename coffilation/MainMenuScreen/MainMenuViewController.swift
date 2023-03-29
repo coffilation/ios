@@ -104,7 +104,6 @@ class MainMenuViewController: UIViewController {
 		discoveryCollectionView.delegate = self
 		discoveryCollectionView.dataSource = self
 		setupLayout()
-		requestProfileInfo()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -114,6 +113,7 @@ class MainMenuViewController: UIViewController {
 		searchTextField.roundCorners(corners: .allCorners, radius: 10, rect: searchTextField.bounds)
 		collectionsTableView.roundCorners(corners: .allCorners, radius: 10, rect: collectionsTableView.bounds)
 		sheetCoordinator?.startTracking(item: self)
+		requestProfileInfo()
 	}
 
 	private func setupLayout() {
@@ -163,9 +163,12 @@ class MainMenuViewController: UIViewController {
 		createButton.autoPinEdge(.left, to: .right, of: collectionsLabel)
 		createButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
 		createButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+		createButton.autoMatch(.height, to: .height, of: collectionsLabel)
 
 		containerView.addSubview(collectionsTableView)
-		collectionsTableView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 16, bottom: 20, right: 16), excludingEdge: .top)
+		collectionsTableView.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
+		collectionsTableView.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
+		collectionsTableView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20, relation: .greaterThanOrEqual)
 		collectionsTableView.autoPinEdge(.top, to: .bottom, of: collectionsLabel, withOffset: 12)
 		tableViewHeightConstraint = collectionsTableView.autoSetDimension(.height, toSize: 82)
 	}
@@ -177,12 +180,22 @@ class MainMenuViewController: UIViewController {
 
 	private func setupAvatarView(with userName: String?) {
 		let name = userName ?? "?"
-		avatarView.addGradient(colors: UIColor.redGradient)
+		let gradient = avatarView.addGradient(colors: UIColor.redGradient)
+		gradient.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
 		label.text = name.prefix(1).capitalized
+		label.textColor = .white
 		avatarView.addSubview(label)
 		label.autoCenterInSuperview()
+	}
+
+	private func setupActions() {
+		createButton.addTarget(self, action: #selector(createNewCollection), for: .touchUpInside)
+	}
+
+	@objc private func createNewCollection() {
+
 	}
 
 	func draggableView() -> UIScrollView? {
@@ -194,29 +207,32 @@ extension MainMenuViewController: MainMenuViewProtocol {
 	func didReceivedUserInfo(with user: User?) {
 		avatarView.stop()
 		guard let user else {
+			setupAvatarView(with: nil)
 			return
 		}
+		setupAvatarView(with: user.name)
 		presenter?.requestCollections(for: user.id)
 		presenter?.requestDiscovery(for: user.id)
 	}
 
 	func didReceivedDiscovery(collections: [Collection]) {
+		discoveryCollections = collections
 		discoveryCollectionView.reloadData()
 	}
 
 	func didReceivedCollections(collections: [Collection]) {
+		ownCollections = collections
 		collectionsTableView.reloadData()
 	}
 }
 
 extension MainMenuViewController: UICollectionViewDelegate {
-
 }
 
 extension MainMenuViewController: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		discoveryCollections.count == 0 ? 4 : discoveryCollections.count
+		discoveryCollections.count == 0 ? 3 : discoveryCollections.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -249,10 +265,13 @@ extension MainMenuViewController: UITableViewDelegate {
 }
 
 extension MainMenuViewController: UITableViewDataSource {
+
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		let items = ownCollections.count == 0 ? 10 : ownCollections.count
-		tableViewHeightConstraint?.constant = 82 * CGFloat(items)
-		return items
+//		let items = ownCollections.count == 0 ? ownCollections.count : ownCollections.count
+		tableViewHeightConstraint?.constant = 82 * CGFloat(ownCollections.count)
+		view.setNeedsUpdateConstraints()
+		view.setNeedsLayout()
+		return ownCollections.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -269,16 +288,7 @@ extension MainMenuViewController: UITableViewDataSource {
 		} else {
 			cell.configure(name: nil, description: nil, gradient: [])
 		}
-
 		return cell
-	}
-
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		UITableView.automaticDimension
-	}
-
-	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-		UITableView.automaticDimension
 	}
 }
 
