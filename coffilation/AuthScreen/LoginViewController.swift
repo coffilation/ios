@@ -65,6 +65,19 @@ class LoginViewController: UIViewController {
 		return button
 	}()
 
+	private let errorLabel: UILabel = {
+		let label = UILabel()
+		label.backgroundColor = .white
+		label.textColor = .red
+		return label
+	}()
+
+	private let loadIndicator: UIActivityIndicatorView = {
+		let indicator = UIActivityIndicatorView(style: .medium)
+		indicator.hidesWhenStopped = true
+		return indicator
+	}()
+
 	private let registerButton: UIButton = {
 		let button = UIButton(type: .system)
 		let title = NSMutableAttributedString(string: "Нет аккаунта? ",
@@ -91,6 +104,9 @@ class LoginViewController: UIViewController {
 
 		setupLayout()
 		setupActions()
+
+		loginField.delegate = self
+		passwordField.delegate = self
 	}
 
 	init() {
@@ -105,7 +121,7 @@ class LoginViewController: UIViewController {
 		loginButton.addTarget(self, action: #selector(requestLogin), for: .touchUpInside)
 
 		let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-		tap.cancelsTouchesInView = false
+//		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
 	}
 
@@ -126,6 +142,8 @@ class LoginViewController: UIViewController {
 		containerView.addSubview(passwordField)
 		containerView.addSubview(loginButton)
 		containerView.addSubview(registerButton)
+		containerView.addSubview(errorLabel)
+		containerView.addSubview(loadIndicator)
 
 		logoView.autoPinEdge(toSuperviewEdge: .top)
 		logoView.autoAlignAxis(toSuperviewAxis: .vertical)
@@ -147,25 +165,74 @@ class LoginViewController: UIViewController {
 
 		registerButton.autoPinEdge(.top, to: .bottom, of: loginButton, withOffset: 16)
 		registerButton.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0), excludingEdge: .top)
+
+		errorLabel.autoAlignAxis(toSuperviewAxis: .vertical)
+		errorLabel.autoPinEdge(.top, to: .bottom, of: passwordField, withOffset: 16)
+
+		loadIndicator.autoAlignAxis(toSuperviewAxis: .vertical)
+		loadIndicator.autoPinEdge(.top, to: .bottom, of: passwordField, withOffset: 18)
 	}
 
 	@objc private func requestLogin() {
-		guard let email = loginField.text, let password = passwordField.text else {
+		guard let email = loginField.text, email != "", let password = passwordField.text, password != "" else {
+			errorLabel.text = "Заполните поля"
+			showErrorLabel()
 			return
 		}
+		hideErrorLabel()
+		disableLoginButton()
 		presenter?.performLogin(email: email, password: password)
+	}
+
+	private func hideErrorLabel() {
+		UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+			self.errorLabel.alpha = 0
+		}
+	}
+
+	private func showErrorLabel() {
+		UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+			self.errorLabel.alpha = 1
+		}
+	}
+
+	private func enableLoginButton() {
+		loadIndicator.stopAnimating()
+		UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) {
+			self.loginButton.backgroundColor = .mainColor
+			self.loginButton.isEnabled = true
+		}
+	}
+
+	private func disableLoginButton() {
+		loadIndicator.startAnimating()
+		UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) {
+			self.loginButton.backgroundColor = .middleGray
+			self.loginButton.isEnabled = false
+		}
 	}
 }
 
 extension LoginViewController: LoginViewProtocol {
 	func receivedError(with error: LoginPresenterErrors) {
-		let alert = UIAlertController(title: "Failure", message: nil, preferredStyle: .alert)
-		let okAction = UIAlertAction(title: "Try again", style: .default)
-		alert.addAction(okAction)
-		present(alert, animated: true)
+		enableLoginButton()
+		switch error {
+		case .loginError:
+			errorLabel.text = "Проверьте введенные данные"
+		case .networkError:
+			errorLabel.text = "Повторите попытку позже"
+		}
+		showErrorLabel()
 	}
 
 	func receivedSuccess() {
+		enableLoginButton()
 		navigationController?.popViewController(animated: true)
+	}
+}
+
+extension LoginViewController: UITextFieldDelegate {
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		hideErrorLabel()
 	}
 }
