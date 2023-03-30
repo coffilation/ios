@@ -38,7 +38,7 @@ class AuthManager: AuthManagerProtocol {
 	private let networkManager: NetworkManagerProtocol
 	private let tokenManager: TokenManagerProtocol
 	private let lock = NSLock()
-	private var needRefreshRequests = [URLRequest: NetworkManagerProtocol.RequestCompletion]()
+	@Atomic private var needRefreshRequests = [URLRequest: NetworkManagerProtocol.RequestCompletion]()
 
 	init(networkManager: NetworkManagerProtocol, tokenManager: TokenManagerProtocol) {
 		self.networkManager = networkManager
@@ -86,9 +86,7 @@ class AuthManager: AuthManagerProtocol {
 		let requestCompletion = networkManager.request(with: enrichedRequest) { [weak self] (result: Result<T, Error>) in
 			switch result {
 			case .success(let success):
-				self?.lock.lock()
 				self?.needRefreshRequests[request] = nil
-				self?.lock.unlock()
 				completion(.success(success))
 			case .failure(let failure as NetworkError):
 				if failure == .notAuthorized {
@@ -98,15 +96,11 @@ class AuthManager: AuthManagerProtocol {
 					completion(.failure(failure))
 				}
 			case .failure(let failure):
-				self?.lock.lock()
 				self?.needRefreshRequests[request] = nil
-				self?.lock.unlock()
 				completion(.failure(failure))
 			}
 		}
-		lock.lock()
 		needRefreshRequests[request] = requestCompletion
-		lock.unlock()
 
 	}
 
@@ -114,7 +108,6 @@ class AuthManager: AuthManagerProtocol {
 
 extension AuthManager: TokenManagerDelegate {
 	func didUpdateToken() {
-		lock.lock()
 		for requestTuple in needRefreshRequests {
 			guard let enrichedRequest = tokenManager.enrichAuthorizedRequest(requestTuple.key) else {
 				return
@@ -122,12 +115,9 @@ extension AuthManager: TokenManagerDelegate {
 			networkManager.retryRequest(for: enrichedRequest,
 										completion: requestTuple.value)
 		}
-		lock.unlock()
 	}
 
 	func didReceiveTokenUpdateError() {
-		lock.lock()
 		needRefreshRequests = [:]
-		lock.unlock()
 	}
 }
