@@ -34,6 +34,7 @@ class NetworkManager: NetworkManagerProtocol {
 			if let response = response as? HTTPURLResponse {
 				if response.statusCode == 401 {
 					completion(.failure(NetworkError.notAuthorized))
+					return
 				}
 			}
 			guard let data = data else {

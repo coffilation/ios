@@ -28,6 +28,9 @@ enum AuthError: Error {
 protocol AuthManagerProtocol {
 	func performLogin(email: String, password: String, completion: @escaping (AuthError?) -> Void)
 
+	func validateToken(completion: @escaping (AuthError?) -> Void)
+
+
 	func authorizedRequest<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, Error>) -> Void)
 }
 
@@ -42,10 +45,21 @@ class AuthManager: AuthManagerProtocol {
 		self.tokenManager = tokenManager
 	}
 
+
+	func validateToken(completion: @escaping (AuthError?) -> Void) {
+		tokenManager.validateToken { error in
+			guard error != nil else {
+				completion(nil)
+				return
+			}
+			completion(.responseError)
+		}
+	}
+
 	func performLogin(email: String, password: String, completion: @escaping (AuthError?) -> Void) {
 		let body = AuthLoginRequestModel(username: email, password: password)
 
-		guard let request = try? RequestBuilder(path: "/auth/login")
+		guard let request = try? RequestBuilder(path: "/auth/jwt/create/")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")
 			.httpJSONBody(body)
@@ -66,9 +80,9 @@ class AuthManager: AuthManagerProtocol {
 
 	func authorizedRequest<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) {
 		guard let enrichedRequest = tokenManager.enrichAuthorizedRequest(request) else {
+			completion(.failure(NetworkError.notAuthorized))
 			return
 		}
-
 		let requestCompletion = networkManager.request(with: enrichedRequest) { [weak self] (result: Result<T, Error>) in
 			switch result {
 			case .success(let success):
@@ -77,7 +91,7 @@ class AuthManager: AuthManagerProtocol {
 				self?.lock.unlock()
 				completion(.success(success))
 			case .failure(let failure as NetworkError):
-				if failure == .notAuthorized, self?.needRefreshRequests[request] == nil {
+				if failure == .notAuthorized {
 					self?.tokenManager.updateToken()
 				} else {
 					self?.needRefreshRequests[request] = nil

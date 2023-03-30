@@ -58,11 +58,13 @@ class CollectionsNetworkManager: CollectionsNetworkManagerProtocol {
 		}
 
 		authManager.authorizedRequest(with: request) { (result: Result<[CollectionResponseModel], Error>) in
-			switch result {
-			case .success(let success):
-				completion(success)
-			case .failure(_):
-				completion([])
+			DispatchQueue.main.async {
+				switch result {
+				case .success(let success):
+					completion(success)
+				case .failure(_):
+					completion([])
+				}
 			}
 		}
 	}
@@ -76,13 +78,15 @@ class CollectionsNetworkManager: CollectionsNetworkManagerProtocol {
 		}
 
 		networkManager.request(with: request) { (result: Result<[CollectionResponseModel], Error>) in
-			switch result {
-			case .success(let success):
-				completion(success.filter({ collection in
-					collection.author.id != userId
-				}))
-			case .failure(_):
-				completion([])
+			DispatchQueue.main.async {
+				switch result {
+				case .success(let success):
+					completion(success.filter({ collection in
+						collection.author.id != userId
+					}))
+				case .failure(_):
+					completion([])
+				}
 			}
 		}
 

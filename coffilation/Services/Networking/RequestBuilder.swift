@@ -100,7 +100,7 @@ struct RequestBuilder {
 
 extension RequestBuilder {
 	func makeRequestForCofApi() -> URLRequest? {
-		guard let baseUrl = URL(string: "https://test.api.coffilation.ru"),
+		guard let baseUrl = URL(string: "https://backend.test.coffilation.ru"),
 			  let finalUrl = urlComponents.url(relativeTo: baseUrl)
 		else {
 			return nil

@@ -24,7 +24,7 @@ class UserNetworkManager: UserNetworkManagerProtocol {
 	}
 
 	func requestUserData(completion: @escaping (UserResponseModel?) -> Void) {
-		guard let request = RequestBuilder(path: "/users/me")
+		guard let request = RequestBuilder(path: "/users/me/")
 			.httpMethod(.get)
 			.httpHeader(name: "accept", value: "application/json")
 			.makeRequestForCofApi() else {
@@ -32,11 +32,13 @@ class UserNetworkManager: UserNetworkManagerProtocol {
 		}
 
 		authManager.authorizedRequest(with: request) { (result: Result<UserResponseModel, Error>) in
-			switch result {
-			case .success(let success):
-				completion(success)
-			case .failure(_):
-				completion(nil)
+			DispatchQueue.main.async {
+				switch result {
+				case .success(let success):
+					completion(success)
+				case .failure(_):
+					completion(nil)
+				}
 			}
 		}
 	}
