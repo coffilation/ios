@@ -18,7 +18,7 @@ protocol SplashScreenPresenterProtocol {
 }
 
 class SplashScreenPresenter: SplashScreenPresenterProtocol {
-	typealias Dependencies = HasUserNetworkManager
+	typealias Dependencies = HasAuthManager
 
 	weak var navigationDelegate: SplashScreenNavigationDelegate?
 
@@ -30,11 +30,13 @@ class SplashScreenPresenter: SplashScreenPresenterProtocol {
 	}
 
 	func validateUserAuth() {
-		dependencies.userNetworkManager.requestUserData { [weak self] userInfo in
-			if userInfo != nil {
-				self?.navigationDelegate?.showMainScreen()
-			} else {
-				self?.navigationDelegate?.showLogin()
+		dependencies.authManager.validateToken { [weak self] error in
+			DispatchQueue.main.async {
+				if error == nil {
+					self?.navigationDelegate?.showMainScreen()
+				} else {
+					self?.navigationDelegate?.showLogin()
+				}
 			}
 		}
 	}
