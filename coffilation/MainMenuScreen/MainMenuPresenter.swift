@@ -42,10 +42,11 @@ protocol MainMenuPresenterProtocol {
 	func requestUserInfo()
 	func requestCollections(for: Int)
 	func requestDiscovery(for: Int)
+	func logout()
 }
 
 class MainMenuPresenter: MainMenuPresenterProtocol {
-	typealias Dependencies = HasUserNetworkManager & HasCollectionNetworkManager
+	typealias Dependencies = HasUserNetworkManager & HasCollectionNetworkManager & HasAuthManager
 
 	weak var view: MainMenuViewProtocol?
 	weak var navigationDelegate: MainMenuNavigationDelegate?
@@ -56,6 +57,10 @@ class MainMenuPresenter: MainMenuPresenterProtocol {
 		self.view = view
 		self.navigationDelegate = navigationDelegate
 		self.dependencies = dependencies
+	}
+
+	func logout() {
+		dependencies.authManager.logout()
 	}
 
 	func requestUserInfo() {

@@ -30,6 +30,7 @@ protocol AuthManagerProtocol {
 
 	func validateToken(completion: @escaping (AuthError?) -> Void)
 
+	func logout()
 
 	func authorizedRequest<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, Error>) -> Void)
 }
@@ -45,6 +46,9 @@ class AuthManager: AuthManagerProtocol {
 		self.tokenManager = tokenManager
 	}
 
+	func logout() {
+		tokenManager.clearTokens()
+	}
 
 	func validateToken(completion: @escaping (AuthError?) -> Void) {
 		tokenManager.validateToken { error in

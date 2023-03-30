@@ -11,14 +11,22 @@ protocol TokenManagerProtocol {
 	var delegate: TokenManagerDelegate? { get set }
 
 	func updateToken()
+	func validateToken(completion: @escaping (AuthError?) -> Void)
 	func saveTokens(with: AuthLoginResponseModel)
 	func enrichAuthorizedRequest(_ request: URLRequest) -> URLRequest?
+	func clearTokens()
 }
 
 protocol TokenManagerDelegate: AnyObject {
 	func didUpdateToken()
 	func didReceiveTokenUpdateError()
 }
+
+struct TokenValidateRequestModel: Encodable {
+	let token: String
+}
+
+struct EmptyModel: Decodable {}
 
 class TokenManager: TokenManagerProtocol {
 	private let tokenProvider: TokenProviderProtocol
@@ -29,6 +37,11 @@ class TokenManager: TokenManagerProtocol {
 	init(tokenProvider: TokenProviderProtocol, networkManager: NetworkManagerProtocol) {
 		self.tokenProvider = tokenProvider
 		self.networkManager = networkManager
+	}
+
+	func clearTokens() {
+		tokenProvider.deleteAuthToken()
+		tokenProvider.deleteRefreshToken()
 	}
 
 	func saveTokens(with model: AuthLoginResponseModel) {
@@ -51,7 +64,7 @@ class TokenManager: TokenManagerProtocol {
 		}
 
 		let body = AuthRefreshRequestModel(refresh: refresh)
-		guard let request = try? RequestBuilder(path: "/auth/refresh")
+		guard let request = try? RequestBuilder(path: "auth/jwt/refresh/")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")
 			.httpJSONBody(body)
@@ -68,6 +81,32 @@ class TokenManager: TokenManagerProtocol {
 				self?.delegate?.didUpdateToken()
 			case .failure(_):
 				self?.delegate?.didReceiveTokenUpdateError()
+			}
+		}
+	}
+
+	func validateToken(completion: @escaping (AuthError?) -> Void) {
+		guard let access = tokenProvider.obtainRefreshToken() else {
+			completion(.responseError)
+			return
+		}
+
+		let body = TokenValidateRequestModel(token: access)
+		guard let request = try? RequestBuilder(path: "auth/jwt/verify/")
+			.httpMethod(.post)
+			.httpHeader(name: "Content-Type", value: "application/json")
+			.httpJSONBody(body)
+			.makeRequestForCofApi()
+		else {
+			return
+		}
+
+		networkManager.request(with: request) {(result: Result<EmptyModel, Error>) in
+			switch result {
+			case .success:
+				completion(nil)
+			case .failure(_):
+				completion(.responseError)
 			}
 		}
 	}

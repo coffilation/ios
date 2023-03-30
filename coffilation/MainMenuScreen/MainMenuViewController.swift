@@ -114,6 +114,7 @@ class MainMenuViewController: UIViewController {
 		collectionsTableView.roundCorners(corners: .allCorners, radius: 10, rect: collectionsTableView.bounds)
 		sheetCoordinator?.startTracking(item: self)
 		requestProfileInfo()
+		setupActions()
 	}
 
 	private func setupLayout() {
@@ -192,6 +193,11 @@ class MainMenuViewController: UIViewController {
 
 	private func setupActions() {
 		createButton.addTarget(self, action: #selector(createNewCollection), for: .touchUpInside)
+		avatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logout)))
+	}
+
+	@objc private func logout() {
+		presenter?.logout()
 	}
 
 	@objc private func createNewCollection() {

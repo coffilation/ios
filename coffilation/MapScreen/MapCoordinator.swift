@@ -31,6 +31,7 @@ class MapCoordinator: Coordinator {
 			navigationController.viewControllers.insert(screen, at: 1)
 		}
 		navigationController.popToViewController(screen, animated: true)
+		navigationController.viewControllers = [screen]
 	}
 }
 
