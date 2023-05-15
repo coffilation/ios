@@ -12,10 +12,8 @@ import UBottomSheet
 
 class MapViewController: UIViewController {
 
-	var sheetCoordinator: UBottomSheetCoordinator?
 	var presenter: MapPresenterProtocol?
 
-	private let mapDataSource = MapBottomSheetDataSource()
 	private var locationManager: CLLocationManager?
 	private var userLocation: CLLocation?
 	private var userCurrentRegion: MKCoordinateRegion?
@@ -63,26 +61,6 @@ class MapViewController: UIViewController {
 		setupActions()
 	}
 
-	override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
-
-		guard sheetCoordinator == nil else {return}
-		sheetCoordinator = UBottomSheetCoordinator(parent: self,
-												   delegate: self)
-		sheetCoordinator?.dataSource = mapDataSource
-
-		guard var menu = presenter?.createBottomSheetScreen() as? DraggableItem else {
-			return
-		}
-		menu.sheetCoordinator = sheetCoordinator
-		sheetCoordinator?.addSheet(menu, to: self, didContainerCreate: { container in
-			let frame = self.view.frame
-			let rect = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
-			container.roundCorners(corners: [.topLeft, .topRight], radius: 10, rect: rect)
-		})
-		sheetCoordinator?.setCornerRadius(10)
-	}
-
 	override func viewDidAppear(_ animated: Bool) {
 		zoomInButton.addBorder(toSide: .bottom, withColor: UIColor.grey2.cgColor, andThickness: 1)
 		zoomOutButton.addBorder(toSide: .bottom, withColor: UIColor.grey2.cgColor, andThickness: 1)
@@ -115,12 +93,6 @@ class MapViewController: UIViewController {
 	}
 
 	@objc private func locateToUserLocation() {
-//		let status = locationManager?.authorizationStatus
-//		if status == .authorizedAlways || status == .authorizedWhenInUse {
-//			locationManager?.requestLocation()
-//		} else if status == .notDetermined {
-//			locationManager?.requestWhenInUseAuthorization()
-//		}
 		guard let userCurrentRegion else { return }
 		mapView.setRegion(userCurrentRegion, animated: true)
 	}
@@ -139,8 +111,6 @@ class MapViewController: UIViewController {
 		mapView.setRegion(region, animated: true)
 	}
 }
-
-extension MapViewController: UBottomSheetCoordinatorDelegate {}
 
 extension MapViewController: MapViewProtocol {}
 

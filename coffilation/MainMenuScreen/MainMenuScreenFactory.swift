@@ -8,7 +8,7 @@
 import UIKit
 
 struct MainMenuScreenFactory {
-	func makeMainMenuScreen(with dependencies: DependencyContainerProtocol, delegate: MainMenuNavigationDelegate?) -> MainMenuViewController {
+	static func makeMainMenuScreen(with dependencies: DependencyContainerProtocol, delegate: MainMenuNavigationDelegate?) -> MainMenuViewController {
 		let menuView = MainMenuViewController()
 		let presenter = MainMenuPresenter(view: menuView, navigationDelegate: delegate, dependencies: dependencies)
 		menuView.presenter = presenter

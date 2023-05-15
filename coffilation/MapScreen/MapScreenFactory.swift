@@ -8,9 +8,9 @@
 import Foundation
 
 struct MapScreenFactory {
-	static func makeMapScreen(delegate: MapNavigationDelegateProtocol?) -> MapViewController {
+	static func makeMapScreen() -> MapViewController {
 		let mapView = MapViewController()
-		let presenter = MapPresenter(view: mapView, navigationDelegate: delegate)
+		let presenter = MapPresenter(view: mapView)
 		mapView.presenter = presenter
 		return mapView
 	}

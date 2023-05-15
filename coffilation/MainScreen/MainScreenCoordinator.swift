@@ -1,21 +1,17 @@
 //
-//  MapCoordinator.swift
+//  MainScreenCoordinator.swift
 //  coffilation
 //
-//  Created by Матвей Борисов on 19.11.2022.
+//  Created by Матвей Борисов on 08.04.2023.
 //
 
 import Foundation
 import UIKit
 
-class MapCoordinator: Coordinator {
+class MainScreenCoordinator: Coordinator {
+
 	private let navigationController: UINavigationController
-
 	private let dependencies: DependencyContainerProtocol
-
-	private lazy var authCoordinator = AuthCoordinator(navigationController: navigationController, dependencies: dependencies)
-
-	private var mainMenuViewController: MainMenuViewController?
 
 	init(
 		navigationController: UINavigationController = UINavigationController(),
@@ -26,7 +22,10 @@ class MapCoordinator: Coordinator {
 	}
 
 	func start() {
-		let screen = MapScreenFactory.makeMapScreen()
+		let screen = MainScreenFactory.createMainScreen(
+			dependencies: dependencies,
+			coordinator: self
+		)
 		screen.loadViewIfNeeded()
 		if navigationController.viewControllers.count <= 1 {
 			navigationController.viewControllers.append(screen)
@@ -38,7 +37,9 @@ class MapCoordinator: Coordinator {
 	}
 }
 
-extension MapCoordinator: MainMenuNavigationDelegate {
+extension MainScreenCoordinator: MapNavigationDelegateProtocol {}
+
+extension MainScreenCoordinator: MainMenuNavigationDelegate {
 	func showNewScreen(with viewController: UIViewController) {
 		navigationController.pushViewController(viewController, animated: true)
 	}

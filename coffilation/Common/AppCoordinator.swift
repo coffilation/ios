@@ -15,7 +15,10 @@ class AppCoordinator {
 
 	private let dependencies: DependencyContainerProtocol
 
-	init(window: UIWindow, navigationController: UINavigationController = UINavigationController(), dependencies: DependencyContainerProtocol) {
+	init(window: UIWindow,
+		 navigationController: UINavigationController = UINavigationController(),
+		 dependencies: DependencyContainerProtocol
+	) {
 		self.window = window
 		self.navigationController = navigationController
 		self.dependencies = dependencies

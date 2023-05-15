@@ -15,8 +15,4 @@ struct AuthScreenFactory {
 
 		return loginView
 	}
-
-	static func makeRegisterScreen() {
-
-	}
 }
