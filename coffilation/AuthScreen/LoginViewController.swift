@@ -43,10 +43,25 @@ class LoginViewController: UIViewController {
 		textField.layer.cornerRadius = 5
 		textField.layer.borderWidth = 1
 		textField.layer.borderColor = UIColor.grey2.cgColor
+
 		let lockImageView = UIImageView(image: CoffilationImage.lock)
 		lockImageView.tintColor = .darkGray
 		lockImageView.contentMode = .scaleAspectFit
 		textField.setLeftView(with: lockImageView, insets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0))
+
+		let hidePassButton = UIButton(type: .custom)
+		var buttonConfig = UIButton.Configuration.plain()
+		buttonConfig.contentInsets = .init(top: 2, leading: 0, bottom: 0, trailing: 12)
+		hidePassButton.configuration = buttonConfig
+		hidePassButton.setImage(CoffilationImage.hidePassword, for: .normal)
+		hidePassButton.tintColor = .darkGray
+		hidePassButton.imageView?.contentMode = .scaleAspectFit
+		hidePassButton.addAction(UIAction(handler: { [weak textField] _ in
+			textField?.isSecureTextEntry.toggle()
+		}), for: .touchUpInside)
+		textField.setRightView(with: hidePassButton, insets: .zero)
+		hidePassButton.autoPinEdgesToSuperviewEdges()
+
 		textField.attributedPlaceholder = NSAttributedString(
 			string: "Пароль",
 			attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
@@ -61,7 +76,6 @@ class LoginViewController: UIViewController {
 		button.setTitle("Вход", for: .normal)
 		button.setTitleColor(.defaultButtonText, for: .normal)
 		button.setImage(CoffilationImage.login, for: .normal)
-		button.imageEdgeInsets.left = -8
 		return button
 	}()
 
@@ -121,7 +135,6 @@ class LoginViewController: UIViewController {
 		loginButton.addTarget(self, action: #selector(requestLogin), for: .touchUpInside)
 
 		let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-//		tap.cancelsTouchesInView = false
 		view.addGestureRecognizer(tap)
 	}
 
