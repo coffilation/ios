@@ -25,7 +25,7 @@ class AuthCoordinator: Coordinator {
 	}
 
 	private func showLoginScreen() {
-		let screen = AuthScreenFactory.makeLoginScreen(with: dependencies, delegate: self)
+		let screen = AuthScreenFactory.makeAuthScreen(with: dependencies, delegate: self)
 		screen.loadViewIfNeeded()
 		navigationController.pushViewController(screen, animated: false)
 	}
@@ -35,7 +35,7 @@ class AuthCoordinator: Coordinator {
 	}
 }
 
-extension AuthCoordinator: LoginNavigationDelegate {
+extension AuthCoordinator: AuthNavigationDelegate {
 	func didTapRegister() {
 
 	}

@@ -8,9 +8,9 @@
 import Foundation
 
 struct AuthScreenFactory {
-	static func makeLoginScreen(with dependencies: DependencyContainerProtocol, delegate: LoginNavigationDelegate?) -> LoginViewController {
-		let loginView = LoginViewController()
-		let presenter = LoginPresenter(view: loginView, navigationDelegate: delegate, dependencies: dependencies)
+	static func makeAuthScreen(with dependencies: DependencyContainerProtocol, delegate: AuthNavigationDelegate?) -> AuthViewController {
+		let loginView = AuthViewController()
+		let presenter = AuthPresenter(view: loginView, navigationDelegate: delegate, dependencies: dependencies)
 		loginView.presenter = presenter
 
 		return loginView

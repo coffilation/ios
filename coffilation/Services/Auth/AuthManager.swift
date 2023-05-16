@@ -26,7 +26,7 @@ enum AuthError: Error {
 }
 
 protocol AuthManagerProtocol {
-	func performLogin(email: String, password: String, completion: @escaping (AuthError?) -> Void)
+	func performLogin(username: String, password: String, completion: @escaping (AuthError?) -> Void)
 
 	func validateToken(completion: @escaping (AuthError?) -> Void)
 
@@ -60,8 +60,8 @@ class AuthManager: AuthManagerProtocol {
 		}
 	}
 
-	func performLogin(email: String, password: String, completion: @escaping (AuthError?) -> Void) {
-		let body = AuthLoginRequestModel(username: email, password: password)
+	func performLogin(username: String, password: String, completion: @escaping (AuthError?) -> Void) {
+		let body = AuthLoginRequestModel(username: username, password: password)
 
 		guard let request = try? RequestBuilder(path: "/auth/jwt/create/")
 			.httpMethod(.post)
