@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum NetworkError: Error {
+enum NetworkError: Error, Equatable {
 	case noResponse
-	case decodeFailure
+	case decodeFailure(Data)
 	case notAuthorized
 }
 
@@ -42,7 +42,7 @@ class NetworkManager: NetworkManagerProtocol {
 				return
 			}
 			guard let responseObject = try? JSONDecoder().decode(T.self, from: data) else {
-				completion(.failure(NetworkError.decodeFailure))
+				completion(.failure(NetworkError.decodeFailure(data)))
 				return
 			}
 			completion(.success(responseObject))

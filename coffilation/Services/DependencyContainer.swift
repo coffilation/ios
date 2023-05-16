@@ -11,6 +11,10 @@ protocol HasAuthManager {
 	var authManager: AuthManagerProtocol { get set }
 }
 
+protocol HasRegisterManager {
+	var registerManager: RegisterManagerProtocol { get set }
+}
+
 protocol HasNetworkManager {
 	var networkManager: NetworkManagerProtocol { get set }
 }
@@ -32,6 +36,7 @@ protocol HasCollectionNetworkManager {
 }
 
 protocol DependencyContainerProtocol: HasAuthManager,
+									  HasRegisterManager,
 									  HasNetworkManager,
 									  HasTokenProvider,
 									  HasTokenManager,
@@ -40,6 +45,7 @@ protocol DependencyContainerProtocol: HasAuthManager,
 
 final class DependencyContainer: DependencyContainerProtocol {
 	var authManager: AuthManagerProtocol
+	var registerManager: RegisterManagerProtocol
 	var tokenManager: TokenManagerProtocol
 	var userNetworkManager: UserNetworkManagerProtocol
 	var collectionNetworkManager: CollectionsNetworkManagerProtocol
@@ -57,5 +63,6 @@ final class DependencyContainer: DependencyContainerProtocol {
 		self.userNetworkManager = userNetworkManager
 		let collectionNetworkManager = CollectionsNetworkManager(authManager: authManager, networkManager: networkManager)
 		self.collectionNetworkManager = collectionNetworkManager
+		registerManager = RegisterManager(networkManager: networkManager)
 	}
 }
