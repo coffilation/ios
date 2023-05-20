@@ -50,7 +50,8 @@ class MainScreenViewController: UIViewController {
 
 		menuView.sheetCoordinator = sheetCoordinator
 		sheetCoordinator?.addSheet(
-			menuView, to: self,
+			menuView,
+			to: self,
 			didContainerCreate: { container in
 				let frame = self.view.frame
 				let rect = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)

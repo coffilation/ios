@@ -18,7 +18,6 @@ class DiscoveryCollectionViewCell: UICollectionViewCell {
 		return label
 	}()
 
-	private let skeleton = SkeletonView()
 	private var gradient: CAGradientLayer?
 
 	override init(frame: CGRect) {
@@ -32,13 +31,10 @@ class DiscoveryCollectionViewCell: UICollectionViewCell {
 
 	override func layoutSubviews() {
 		roundCorners(corners: .allCorners, radius: 8, rect: bounds)
-		gradient?.frame = skeleton.bounds
+		gradient?.frame = bounds
 	}
 
 	private func setupLayout() {
-		addSubview(skeleton)
-		skeleton.autoPinEdgesToSuperviewEdges()
-
 		addSubview(labelText)
 		labelText.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 4, bottom: 8, right: 4), excludingEdge: .top)
 		labelText.autoPinEdge(toSuperviewEdge: .top, withInset: 8, relation: .greaterThanOrEqual)
@@ -47,16 +43,7 @@ class DiscoveryCollectionViewCell: UICollectionViewCell {
 	func configure(text: String?, gradient: [CGColor]) {
 		labelText.text = text ?? ""
 		self.gradient = nil
-		if text == nil {
-			skeleton.start()
-		} else {
-			skeleton.stop()
-			if !gradient.isEmpty {
-				self.gradient = addGradient(colors: gradient)
-			} else {
-				self.gradient = addGradient(colors: UIColor.orangeGradient)
-			}
-		}
+		self.gradient = addGradient(colors: gradient)
 		bringSubviewToFront(labelText)
 	}
 }

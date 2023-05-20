@@ -19,4 +19,6 @@ struct CoffilationImage {
 	static let hidePassword = UIImage(named: "HidePasswordIcon")
 
 	static let search = UIImage(named: "SearchIcon")
+
+	static let refresh = UIImage(named: "RefreshIcon")
 }

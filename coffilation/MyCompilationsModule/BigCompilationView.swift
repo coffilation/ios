@@ -1,15 +1,16 @@
 //
-//  CollectionTableViewCell.swift
+//  BigCompilationView.swift
 //  coffilation
 //
-//  Created by Матвей Борисов on 29.11.2022.
+//  Created by Матвей Борисов on 19.05.2023.
 //
 
+import Foundation
 import UIKit
 
-class CollectionTableViewCell: UITableViewCell {
+class BigCompilationView: UIView {
 
-	private let collectionAvatarImage = SkeletonView()
+	private let collectionAvatarImage = UIView()
 
 	private let collectionAvatarLabel: UILabel = {
 		let label = UILabel()
@@ -37,8 +38,8 @@ class CollectionTableViewCell: UITableViewCell {
 		return label
 	}()
 
-	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-		super.init(style: style, reuseIdentifier: reuseIdentifier)
+	init() {
+		super.init(frame: .zero)
 		setupLayout()
 	}
 
@@ -49,7 +50,9 @@ class CollectionTableViewCell: UITableViewCell {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		collectionAvatarImage.roundCorners(corners: .allCorners, radius: 8, rect: collectionAvatarImage.bounds)
+		roundCorners(corners: .allCorners, radius: 10, rect: bounds)
 		gradient?.frame = collectionAvatarImage.bounds
+		backgroundColor = .white
 	}
 
 	private func setupLayout() {
@@ -71,29 +74,14 @@ class CollectionTableViewCell: UITableViewCell {
 		descriptionLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
 	}
 
-	func configure(name: String?, description: String?, gradient: [CGColor]) {
+	func configure(name: String, description: String?, gradient: [CGColor]) {
 		nameLabel.text = name
-		descriptionLabel.text = description
-		let collectionName = name ?? "?"
+		descriptionLabel.text = description ?? ""
+		let collectionName = name
 		collectionAvatarLabel.text = collectionName.prefix(1).capitalized
 		self.gradient?.removeFromSuperlayer()
 		self.gradient = nil
-		if name == nil {
-			collectionAvatarImage.start()
-		} else {
-			collectionAvatarImage.stop()
-			if !gradient.isEmpty {
-				self.gradient = collectionAvatarImage.addGradient(colors: gradient)
-			} else {
-				self.gradient = collectionAvatarImage.addGradient(colors: UIColor.orangeGradient)
-			}
-		}
+		self.gradient = collectionAvatarImage.addGradient(colors: gradient)
 		collectionAvatarImage.bringSubviewToFront(collectionAvatarLabel)
-	}
-}
-
-extension UITableViewCell {
-	static var reuseIdentifier: String {
-		return NSStringFromClass(self)
 	}
 }

@@ -26,8 +26,6 @@ struct TokenValidateRequestModel: Encodable {
 	let token: String
 }
 
-struct EmptyModel: Decodable {}
-
 class TokenManager: TokenManagerProtocol {
 	private let tokenProvider: TokenProviderProtocol
 	private let networkManager: NetworkManagerProtocol
@@ -86,12 +84,12 @@ class TokenManager: TokenManagerProtocol {
 	}
 
 	func validateToken(completion: @escaping (AuthError?) -> Void) {
-		guard let access = tokenProvider.obtainRefreshToken() else {
+		guard let refresh = tokenProvider.obtainRefreshToken() else {
 			completion(.responseError)
 			return
 		}
 
-		let body = TokenValidateRequestModel(token: access)
+		let body = TokenValidateRequestModel(token: refresh)
 		guard let request = try? RequestBuilder(path: "auth/jwt/verify/")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")

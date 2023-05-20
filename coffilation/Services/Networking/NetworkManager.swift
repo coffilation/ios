@@ -41,12 +41,14 @@ class NetworkManager: NetworkManagerProtocol {
 				completion(.failure(NetworkError.noResponse))
 				return
 			}
-			guard let responseObject = try? JSONDecoder().decode(T.self, from: data) else {
-				completion(.failure(NetworkError.decodeFailure(data)))
-				return
-			}
-			completion(.success(responseObject))
 
+			do {
+				let responseObject = try JSONDecoder().decode(T.self, from: data)
+				completion(.success(responseObject))
+			} catch {
+				print(error)
+				completion(.failure(NetworkError.decodeFailure(data)))
+			}
 		}
 		let dataTask = session.dataTask(with: request, completionHandler: requestCompletion)
 		dataTask.resume()
