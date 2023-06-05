@@ -49,5 +49,7 @@ class BigCompilationLoadingView: UIView {
 		collectionAvatarImage.start()
 		nameLabel.start()
 		descriptionLabel.start()
+
+		backgroundColor = .white
 	}
 }

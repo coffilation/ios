@@ -62,7 +62,7 @@ class TokenManager: TokenManagerProtocol {
 		}
 
 		let body = AuthRefreshRequestModel(refresh: refresh)
-		guard let request = try? RequestBuilder(path: "auth/jwt/refresh/")
+		guard let request = try? RequestBuilder(path: "/jwt/refresh/")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")
 			.httpJSONBody(body)
@@ -90,7 +90,7 @@ class TokenManager: TokenManagerProtocol {
 		}
 
 		let body = TokenValidateRequestModel(token: refresh)
-		guard let request = try? RequestBuilder(path: "auth/jwt/verify/")
+		guard let request = try? RequestBuilder(path: "/jwt/verify/")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")
 			.httpJSONBody(body)

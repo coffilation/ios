@@ -71,14 +71,18 @@ class MainMenuViewController: UIViewController {
 		setupLayout()
 	}
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		sheetCoordinator?.startTracking(item: self)
+		requestProfileInfo()
+		setupActions()
+	}
+
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		dragView.roundCorners(corners: .allCorners, radius: 2.5, rect: dragView.bounds)
 		avatarView.roundCorners(corners: .allCorners, radius: 18, rect: avatarView.bounds)
 		searchTextField.roundCorners(corners: .allCorners, radius: 10, rect: searchTextField.bounds)
-		sheetCoordinator?.startTracking(item: self)
-		requestProfileInfo()
-		setupActions()
 	}
 
 	private func setupLayout() {
@@ -135,14 +139,15 @@ class MainMenuViewController: UIViewController {
 
 	private func setupActions() {
 		avatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logout)))
+		myCompilationsView.showScreenAction = { [weak self] controller in
+			self?.presenter.showNewScreen(with: controller)
+			self?.navigationItem.setHidesBackButton(false, animated: true)
+			self?.navigationController?.setNavigationBarHidden(false, animated: true)
+		}
 	}
 
 	@objc private func logout() {
 		presenter.logout()
-	}
-
-	@objc private func createNewCollection() {
-
 	}
 
 	func draggableView() -> UIScrollView? {

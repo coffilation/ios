@@ -63,7 +63,7 @@ class AuthManager: AuthManagerProtocol {
 	func performLogin(username: String, password: String, completion: @escaping (AuthError?) -> Void) {
 		let body = AuthLoginRequestModel(username: username, password: password)
 
-		guard let request = try? RequestBuilder(path: "/auth/jwt/create/")
+		guard let request = try? RequestBuilder(path: "/jwt/create/")
 			.httpMethod(.post)
 			.httpHeader(name: "Content-Type", value: "application/json")
 			.httpJSONBody(body)
@@ -82,12 +82,17 @@ class AuthManager: AuthManagerProtocol {
 		}
 	}
 
-	func authorizedRequest<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) {
+	func authorizedRequest<T: Decodable>(
+		with request: URLRequest,
+		completion: @escaping (Result<T, Error>) -> Void
+	) {
 		guard let enrichedRequest = tokenManager.enrichAuthorizedRequest(request) else {
 			completion(.failure(NetworkError.notAuthorized))
 			return
 		}
-		let requestCompletion = networkManager.request(with: enrichedRequest) { [weak self] (result: Result<T, Error>) in
+		let requestCompletion = networkManager.request(
+			with: enrichedRequest
+		) { [weak self] (result: Result<T, Error>) in
 			switch result {
 			case .success(let success):
 				self?.needRefreshRequests[request] = nil
@@ -105,7 +110,6 @@ class AuthManager: AuthManagerProtocol {
 			}
 		}
 		needRefreshRequests[request] = requestCompletion
-
 	}
 
 }

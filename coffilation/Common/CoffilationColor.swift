@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIColor {
+//	static let mainColor = UIColor(displayP3Red: 255/255, green: 103/255, blue: 72/255, alpha: 1)
+
 	static let mainColor = UIColor(red: 255/255, green: 103/255, blue: 72/255, alpha: 1)
 
 	static let darkGray = UIColor(red: 108/255, green: 108/255, blue: 108/255, alpha: 1)
@@ -21,6 +23,8 @@ extension UIColor {
 	static let defaultButtonText = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
 
 	static let coffiLightGray = UIColor(red: 247/255, green: 248/255, blue: 248/255, alpha: 1)
+
+	static let shadow = UIColor(red: 0, green: 0, blue: 0, alpha: 0.13)
 
 	static let redGradient = (
 		start: UIColor(red: 223/255, green: 70/255, blue: 133/255, alpha: 1).cgColor,
@@ -40,5 +44,10 @@ extension UIColor {
 	static let blueGradient = (
 		start: UIColor(red: 72/255, green: 224/255, blue: 151/255, alpha: 1).cgColor,
 		end: UIColor(red: 112/255, green: 0/255, blue: 255/255, alpha: 1).cgColor
+	)
+
+	static let greenGradient = (
+		start: UIColor(red: 0/255, green: 160/255, blue: 6/255, alpha: 1).cgColor,
+		end: UIColor(red: 255/255, green: 235/255, blue: 55/255, alpha: 1).cgColor
 	)
 }

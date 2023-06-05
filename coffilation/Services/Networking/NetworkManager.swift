@@ -24,7 +24,10 @@ protocol NetworkManagerProtocol {
 class NetworkManager: NetworkManagerProtocol {
 	private let session = URLSession(configuration: .default)
 
-	func request<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) -> RequestCompletion {
+	func request<T: Decodable>(
+		with request: URLRequest,
+		completion: @escaping (Result<T, Error>) -> Void
+	) -> RequestCompletion {
 		let requestCompletion = { (data: Data?, response: URLResponse?, error: Error?) -> Void in
 			if let error {
 				completion(.failure(error))

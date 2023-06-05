@@ -18,6 +18,7 @@ protocol MainMenuNavigationDelegate: AnyObject {
 protocol MainMenuPresenterProtocol {
 	func requestUserInfo()
 	func logout()
+	func showNewScreen(with viewController: UIViewController)
 }
 
 class MainMenuPresenter: MainMenuPresenterProtocol {
@@ -46,5 +47,9 @@ class MainMenuPresenter: MainMenuPresenterProtocol {
 			}
 			self?.view?.didReceivedUserInfo(with: User(id: userInfo.id, username: userInfo.username))
 		}
+	}
+
+	func showNewScreen(with viewController: UIViewController) {
+		navigationDelegate?.showNewScreen(with: viewController)
 	}
 }

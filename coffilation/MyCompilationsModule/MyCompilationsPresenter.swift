@@ -11,6 +11,7 @@ protocol MyCompilationsNavigationDelegate: AnyObject {}
 
 protocol MyCompilationsPresenterProtocol: AnyObject {
 	func requestMyCompilations(userId: Int)
+	func createCompilationEditScreen() -> CompilationEditViewController
 }
 
 class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
@@ -32,19 +33,25 @@ class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
 
 	func requestMyCompilations(userId: Int) {
 		dependencies.collectionNetworkManager.requestUserCollections(
-			for: userId,
-			completion: { [weak self] (result: Result<[CompilationResponseModel], Error>) in
-				switch result {
-				case .success(let rawCompilations):
-					let compilations = rawCompilations.compactMap { Compilation.convert(from: $0) }
-					self?.view?.didReceivedMyCompilations(compilations: compilations)
-				case .failure:
-					guard self != nil else {
-						fatalError()
-					}
-					self?.view?.didReceivedError()
+			for: userId
+		) { [weak self] (result: Result<[CompilationResponseModel], Error>) in
+			switch result {
+			case .success(let rawCompilations):
+				let compilations = rawCompilations.compactMap { Compilation.convert(from: $0) }
+				self?.view?.didReceivedMyCompilations(compilations: compilations)
+			case .failure:
+				guard self != nil else {
+					fatalError()
 				}
+				self?.view?.didReceivedError()
 			}
-		)
+		}
+	}
+
+	func createCompilationEditScreen() -> CompilationEditViewController {
+		guard let dependencies = dependencies as? DependencyContainerProtocol else {
+			fatalError()
+		}
+		return CompilationEditFactory.makeCompilationEditScreen(with: dependencies)
 	}
 }

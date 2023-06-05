@@ -33,19 +33,18 @@ class DiscoveryPresenter: DiscoveryPresenterProtocol {
 
 	func requestDiscovery(userId: Int) {
 		dependencies.collectionNetworkManager.requestDiscoveryCompilations(
-			userId: userId,
-			completion: { [weak self] (result: Result<[CompilationResponseModel], Error>) in
-				switch result {
-				case .success(let rawCompilations):
-					let compilations = rawCompilations.compactMap { Compilation.convert(from: $0) }
-					self?.view?.didReceivedDiscovery(compilations: compilations)
-				case .failure:
-					guard self != nil else {
-						fatalError()
-					}
-					self?.view?.didReceivedError()
+			userId: userId
+		) { [weak self] (result: Result<[CompilationResponseModel], Error>) in
+			switch result {
+			case .success(let rawCompilations):
+				let compilations = rawCompilations.compactMap { Compilation.convert(from: $0) }
+				self?.view?.didReceivedDiscovery(compilations: compilations)
+			case .failure:
+				guard self != nil else {
+					fatalError()
 				}
+				self?.view?.didReceivedError()
 			}
-		)
+		}
 	}
 }

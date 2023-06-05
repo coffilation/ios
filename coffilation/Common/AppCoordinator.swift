@@ -29,6 +29,7 @@ class AppCoordinator {
 	private func setupWindow() {
 		window.rootViewController = navigationController
 		window.makeKeyAndVisible()
+		window.tintColor = .mainColor
 	}
 
 	private func setupStarterCoordinator() {

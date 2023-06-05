@@ -21,10 +21,23 @@ struct CompilationsResponseModel: Codable {
 	let results: [CompilationResponseModel]
 }
 
-protocol CompilationsNetworkManagerProtocol {
-	func requestUserCollections(for userId: Int, completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void)
+struct CompilationCreateRequestModel: Encodable {
+	let name: String
+	let primaryColor: String
+	let secondaryColor: String
+	let isPrivate: Bool
+	let description: String?
+}
 
-	func requestDiscoveryCompilations(userId: Int, completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void)
+protocol CompilationsNetworkManagerProtocol {
+	func requestUserCollections(for userId: Int, _ completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void)
+
+	func requestDiscoveryCompilations(userId: Int, _ completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void)
+
+	func createCompilation(
+		data: CompilationCreateRequestModel,
+		_ completion: @escaping (Result<CompilationResponseModel, Error>) -> Void
+	)
 }
 
 class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
@@ -36,7 +49,7 @@ class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
 		self.networkManager = networkManager
 	}
 
-	func requestUserCollections(for userId: Int, completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void) {
+	func requestUserCollections(for userId: Int, _ completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void) {
 		guard let request = RequestBuilder(path: "/compilations/")
 			.httpMethod(.get)
 			.queryItem(name: "compilationmembership__user", value: "\(userId)")
@@ -59,7 +72,7 @@ class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
 		}
 	}
 
-	func requestDiscoveryCompilations(userId: Int, completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void) {
+	func requestDiscoveryCompilations(userId: Int, _ completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void) {
 		guard let request = RequestBuilder(path: "/compilations/")
 			.httpMethod(.get)
 			.queryItem(name: "compilationmembership__user__not", value: "\(userId)")
@@ -81,4 +94,33 @@ class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
 			}
 		}
 	}
+
+	func createCompilation(
+		data: CompilationCreateRequestModel,
+		_ completion: @escaping (Result<CompilationResponseModel, Error>) -> Void
+	) {
+		guard let request = try? RequestBuilder(path: "/compilations/")
+			.httpMethod(.post)
+			.httpHeader(name: "accept", value: "application/json")
+			.httpHeader(name: "Content-Type", value: "application/json")
+			.httpJSONBody(data)
+			.makeRequestForCofApi()
+		else {
+			return
+		}
+		print(request.description)
+		guard let data = request.httpBody else { return }
+		print(String(decoding: data, as: UTF8.self))
+		authManager.authorizedRequest(with: request) { (result: Result<CompilationResponseModel, Error>) in
+			DispatchQueue.main.async {
+				switch result {
+				case .success(let model):
+					completion(.success(model))
+				case .failure(_):
+					completion(.failure(NetworkError.noResponse))
+				}
+			}
+		}
+	}
+
 }

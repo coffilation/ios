@@ -12,6 +12,7 @@ protocol MyCompilationsViewProtocol: UIView {
 	func loadMyCompilations(userId: Int)
 	func didReceivedMyCompilations(compilations: [Compilation])
 	func didReceivedError()
+	var showScreenAction: ((UIViewController) -> Void)? { get set }
 }
 
 class MyCompilationsView: UIView {
@@ -46,6 +47,7 @@ class MyCompilationsView: UIView {
 	private let loadingStack: UIStackView = {
 		let stack = UIStackView()
 		stack.spacing = 8
+		stack.axis = .vertical
 		for _ in 0...2 {
 			let loadingView = BigCompilationLoadingView()
 			stack.addArrangedSubview(loadingView)
@@ -83,12 +85,15 @@ class MyCompilationsView: UIView {
 
 	private var retryAction: (() -> Void)?
 
+	private var makeCompilationButtonAction: ((UIViewController) -> Void)?
+
 	init(presenter: MyCompilationsPresenterProtocol) {
 		self.presenter = presenter
 		super.init(frame: .zero)
 		setupLayout()
 
 		errorButton.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
+		createButton.addTarget(self, action: #selector(makeCompilationButtonTapped), for: .touchUpInside)
 	}
 
 	required init?(coder: NSCoder) {
@@ -98,6 +103,7 @@ class MyCompilationsView: UIView {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		showMoreButton.roundCorners(corners: .allCorners, radius: 10, rect: showMoreButton.bounds)
+		errorButton.roundCorners(corners: .allCorners, radius: 10, rect: errorButton.bounds)
 	}
 
 	private func setupLayout() {
@@ -115,11 +121,13 @@ class MyCompilationsView: UIView {
 		createButton.autoMatch(.height, to: .height, of: compilationsLabel)
 
 		addSubview(errorButton)
-		errorButton.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
+		errorButton.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
+		errorButton.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
 		errorButton.autoPinEdge(.top, to: .bottom, of: compilationsLabel, withOffset: 12)
+		errorButton.autoSetDimension(.height, toSize: 48)
 
 		addSubview(loadingStack)
-		loadingStack.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
+		loadingStack.autoPinEdgesToSuperviewEdges(with: .init(top: 0, left: 16, bottom: 0, right: 16), excludingEdge: .top)
 		loadingStack.autoPinEdge(.top, to: .bottom, of: compilationsLabel, withOffset: 12)
 
 		addSubview(showMoreButton)
@@ -137,6 +145,7 @@ class MyCompilationsView: UIView {
 				self.loadingStack.isHidden = true
 				self.myCompilationsStack.alpha = 0
 				self.myCompilationsStack.isHidden = true
+				self.showMoreButton.isHidden = true
 			}
 			UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
 				switch state {
@@ -188,9 +197,18 @@ class MyCompilationsView: UIView {
 	@objc private func retryButtonTapped() {
 		retryAction?()
 	}
+
+	@objc private func makeCompilationButtonTapped() {
+		makeCompilationButtonAction?(presenter.createCompilationEditScreen())
+	}
 }
 
 extension MyCompilationsView: MyCompilationsViewProtocol {
+	var showScreenAction: ((UIViewController) -> Void)? {
+		get { makeCompilationButtonAction }
+		set { makeCompilationButtonAction = newValue }
+	}
+
 	func loadMyCompilations(userId: Int) {
 		updateState(.loading)
 		presenter.requestMyCompilations(userId: userId)

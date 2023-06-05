@@ -22,7 +22,7 @@ class AuthViewController: UIViewController {
 		let textField = UITextField()
 		textField.backgroundColor = .white
 		textField.borderStyle = .roundedRect
-		textField.layer.cornerRadius = 5
+		textField.layer.cornerRadius = 10
 		textField.layer.borderWidth = 1
 		textField.layer.borderColor = UIColor.grey2.cgColor
 		let profileImageView = UIImageView(image: CoffilationImage.profile)
@@ -41,7 +41,7 @@ class AuthViewController: UIViewController {
 
 	private let mainActionButton: UIButton = {
 		let button = UIButton(type: .system)
-		button.layer.cornerRadius = 5
+		button.layer.cornerRadius = 10
 		button.backgroundColor = .mainColor
 		button.tintColor = .defaultButtonText
 		button.setTitle("Вход", for: .normal)
