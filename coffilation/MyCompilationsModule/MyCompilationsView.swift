@@ -70,6 +70,8 @@ class MyCompilationsView: UIView {
 		return button
 	}()
 
+	private var showMoreButtonConstraint: NSLayoutConstraint?
+
 	private let errorButton: UIButton = {
 		let button = UIButton(type: .system)
 		var configuration = UIButton.Configuration.plain()
@@ -161,7 +163,9 @@ class MyCompilationsView: UIView {
 					self.myCompilationsStack.autoPinEdge(toSuperviewEdge: .leading, withInset: 16)
 					self.myCompilationsStack.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
 					self.myCompilationsStack.autoPinEdge(.top, to: .bottom, of: self.compilationsLabel, withOffset: 12)
-					self.myCompilationsStack.autoPinEdge(.bottom, to: .top, of: self.showMoreButton, withOffset: -8)
+					self.showMoreButtonConstraint = compilations.count > 3
+					? self.myCompilationsStack.autoPinEdge(.bottom, to: .top, of: self.showMoreButton, withOffset: -8)
+					: nil
 					self.myCompilationsStack.layer.opacity = 1
 				case .empty:
 					self.errorButton.layer.opacity = 0
