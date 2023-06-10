@@ -56,11 +56,11 @@ class ColorSelectView: UIView {
 	}()
 
 	private lazy var gradientsButtons = [
-		firstButton: firstButton.addGradient(colors: [defaultGradients[0].start, defaultGradients[0].end]),
-		secondButton: secondButton.addGradient(colors: [defaultGradients[1].start, defaultGradients[1].end]),
-		thirdButton: thirdButton.addGradient(colors: [defaultGradients[2].start, defaultGradients[2].end]),
-		fourthButton: fourthButton.addGradient(colors: [defaultGradients[3].start, defaultGradients[3].end]),
-		fifthButton: fifthButton.addGradient(colors: [defaultGradients[4].start, defaultGradients[4].end])
+		(firstButton, firstButton.addGradient(colors: [defaultGradients[0].start, defaultGradients[0].end])),
+		(secondButton, secondButton.addGradient(colors: [defaultGradients[1].start, defaultGradients[1].end])),
+		(thirdButton, thirdButton.addGradient(colors: [defaultGradients[2].start, defaultGradients[2].end])),
+		(fourthButton, fourthButton.addGradient(colors: [defaultGradients[3].start, defaultGradients[3].end])),
+		(fifthButton, fifthButton.addGradient(colors: [defaultGradients[4].start, defaultGradients[4].end]))
 	]
 
 	private var selectedButton: UIButton?
