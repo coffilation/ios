@@ -10,7 +10,8 @@ import PureLayout
 
 protocol DiscoveryViewProtocol: UIView {
 	func loadDiscovery(userId: Int)
-	func didReceivedDiscovery(compilations: [Compilation])
+	func didReceivedDiscovery(isEnd: Bool, compilations: [Compilation])
+	func appendDiscovery(isEnd: Bool, with compilations: [Compilation])
 	func didReceivedError()
 }
 
@@ -46,6 +47,7 @@ class DiscoveryView: UIView {
 		layout.scrollDirection = .horizontal
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.backgroundColor = .clear
+		collectionView.alwaysBounceHorizontal = true
 		collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 		collectionView.showsVerticalScrollIndicator = false
 		collectionView.showsHorizontalScrollIndicator = false
@@ -53,11 +55,19 @@ class DiscoveryView: UIView {
 		return collectionView
 	}()
 
+	private lazy var paginationManager: HorizontalPaginationManager = {
+		let manager = HorizontalPaginationManager(scrollView: discoveryCollectionView)
+		return manager
+	}()
+
+	private var paginationCompletion: (() -> Void)?
+
 	init(presenter: DiscoveryPresenterProtocol) {
 		self.presenter = presenter
 		super.init(frame: .zero)
 		discoveryCollectionView.delegate = self
 		discoveryCollectionView.dataSource = self
+		paginationManager.delegate = self
 		setupLayout()
 	}
 
@@ -118,13 +128,28 @@ extension DiscoveryView: DiscoveryViewProtocol {
 		}
 	}
 
-	func didReceivedDiscovery(compilations: [Compilation]) {
+	func didReceivedDiscovery(isEnd: Bool, compilations: [Compilation]) {
+		paginationManager.isEnd = isEnd
 		discoveryCollections = compilations
 		updateCollectionState(with: .content)
+		paginationCompletion?()
+		paginationCompletion = nil
 	}
 
 	func didReceivedError() {
 		updateCollectionState(with: .error)
+		paginationCompletion?()
+		paginationCompletion = nil
+	}
+
+	func appendDiscovery(isEnd: Bool, with compilations: [Compilation]) {
+		paginationManager.isEnd = isEnd
+		if !compilations.isEmpty {
+			discoveryCollections.append(contentsOf: compilations)
+			discoveryCollectionView.reloadData()
+		}
+		paginationCompletion?()
+		paginationCompletion = nil
 	}
 }
 
@@ -167,5 +192,18 @@ extension DiscoveryView: UICollectionViewDataSource {
 		minimumInteritemSpacingForSectionAt section: Int
 	) -> CGFloat {
 		return 8
+	}
+}
+
+extension DiscoveryView: HorizontalPaginationManagerDelegate {
+	func refreshAll(completion: @escaping () -> Void) {
+		updateCollectionState(with: .loading)
+		paginationCompletion = completion
+		presenter.refreshAll()
+	}
+
+	func loadMore(completion: @escaping () -> Void) {
+		paginationCompletion = completion
+		presenter.loadMore()
 	}
 }
