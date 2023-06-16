@@ -76,6 +76,7 @@ class MainMenuViewController: UIViewController {
 		sheetCoordinator?.startTracking(item: self)
 		requestProfileInfo()
 		setupActions()
+		navigationController?.setNavigationBarHidden(true, animated: true)
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -83,6 +84,7 @@ class MainMenuViewController: UIViewController {
 		dragView.roundCorners(corners: .allCorners, radius: 2.5, rect: dragView.bounds)
 		avatarView.roundCorners(corners: .allCorners, radius: 18, rect: avatarView.bounds)
 		searchTextField.roundCorners(corners: .allCorners, radius: 10, rect: searchTextField.bounds)
+		navigationController?.navigationBar.topItem?.title = ""
 	}
 
 	private func setupLayout() {
@@ -141,6 +143,7 @@ class MainMenuViewController: UIViewController {
 		avatarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logout)))
 		myCompilationsView.showScreenAction = { [weak self] controller in
 			self?.presenter.showNewScreen(with: controller)
+			self?.navigationController?.navigationBar.topItem?.title = ""
 			self?.navigationItem.setHidesBackButton(false, animated: true)
 			self?.navigationController?.setNavigationBarHidden(false, animated: true)
 		}

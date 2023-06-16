@@ -18,15 +18,44 @@ class MainScreenViewController: UIViewController {
 	private let mainScreenDataSource = MainScreenBottomSheetDataSource()
 
 	private let mapView: MapViewController
-	private let menuView: MainMenuViewController
+	private let coordinator: MainScreenCoordinator
+	private var menuView: MainMenuViewController?
 
 	init(
+		presenter: MainScreenPresenter,
 		mapView: MapViewController,
-		menuView: MainMenuViewController
+		coordinator: MainScreenCoordinator
 	) {
 		self.mapView = mapView
-		self.menuView = menuView
+		self.coordinator = coordinator
 		super.init(nibName: nil, bundle: nil)
+		menuView = coordinator.makeMenuScreen(delegate: coordinator, openCompilationScreen: { [weak self] compilation in
+			guard let self else {
+				return
+			}
+			self.sheetCoordinator?.removeSheet()
+			self.coordinator.saveNavigationStack()
+			let compilationOnMapView = coordinator.makeCompilationOnMapScreen(with: compilation, delegate: self.mapView, didCloseCompletion: {
+				self.coordinator.restoreNavigationStack()
+				guard let menuView = self.menuView else {
+					return
+				}
+				self.title = ""
+				self.navigationController?.setNavigationBarHidden(true, animated: true)
+				self.sheetCoordinator?.addSheet(
+					menuView,
+					to: self,
+					didContainerCreate: { container in
+						let frame = self.view.frame
+						let rect = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height)
+						container.roundCorners(corners: [.topLeft, .topRight], radius: 10, rect: rect)
+					}
+				)
+
+			})
+			self.mapView.delegate = compilationOnMapView
+			self.coordinator.showSheetScreen(with: compilationOnMapView)
+		})
 
 		addChild(mapView)
 		view.addSubview(mapView.view)
@@ -41,13 +70,14 @@ class MainScreenViewController: UIViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 
-		guard sheetCoordinator == nil else {return}
+		guard let menuView, sheetCoordinator == nil else {return}
 		sheetCoordinator = UBottomSheetCoordinator(
 			parent: self,
 			delegate: self
 		)
 		sheetCoordinator?.dataSource = mainScreenDataSource
-
+		self.title = ""
+		navigationController?.setNavigationBarHidden(true, animated: true)
 		menuView.sheetCoordinator = sheetCoordinator
 		sheetCoordinator?.addSheet(
 			menuView,

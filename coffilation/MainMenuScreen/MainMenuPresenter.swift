@@ -13,6 +13,8 @@ protocol MainMenuViewProtocol: AnyObject {
 
 protocol MainMenuNavigationDelegate: AnyObject {
 	func showNewScreen(with viewController: UIViewController)
+
+	func showSheetScreen(with viewController: UIViewController)
 }
 
 protocol MainMenuPresenterProtocol {

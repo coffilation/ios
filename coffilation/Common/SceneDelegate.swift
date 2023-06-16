@@ -22,6 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		self.window = window
 		appCoordinator = AppCoordinator(window: window, dependencies: DependencyContainer())
 		appCoordinator?.start()
+
+		let appearance = UINavigationBarAppearance()
+		appearance.configureWithTransparentBackground()
+		appearance.backgroundEffect = UIBlurEffect(style: .light)
+
+		let scrollingAppearance = UINavigationBarAppearance()
+		scrollingAppearance.configureWithTransparentBackground()
+		scrollingAppearance.backgroundEffect = UIBlurEffect(style: .light)
+
+		UINavigationBar.appearance().standardAppearance = appearance
+		UINavigationBar.appearance().scrollEdgeAppearance = scrollingAppearance
+		UINavigationBar.appearance().compactAppearance = scrollingAppearance
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {

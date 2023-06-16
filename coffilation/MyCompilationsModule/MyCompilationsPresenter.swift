@@ -12,6 +12,7 @@ protocol MyCompilationsNavigationDelegate: AnyObject {}
 protocol MyCompilationsPresenterProtocol: AnyObject {
 	func requestMyCompilations(userId: Int)
 	func createCompilationEditScreen() -> CompilationEditViewController
+	func createCompilationsListScreen(openCompilationScreen: @escaping  (Compilation) -> Void) -> CompilationsListViewController
 }
 
 class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
@@ -23,6 +24,8 @@ class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
 
 	private let dependencies: Dependencies
 
+	private var userId = 0
+
 	init(
 		navigationDelegate: MyCompilationsNavigationDelegate? = nil,
 		dependencies: Dependencies
@@ -32,12 +35,15 @@ class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
 	}
 
 	func requestMyCompilations(userId: Int) {
+		self.userId = userId
 		dependencies.collectionNetworkManager.requestUserCollections(
-			for: userId
-		) { [weak self] (result: Result<[CompilationResponseModel], Error>) in
+			userId: userId,
+			limit: 5,
+			offset: 0
+		) { [weak self] (result: Result<CompilationsResponseModel, Error>) in
 			switch result {
-			case .success(let rawCompilations):
-				let compilations = rawCompilations.compactMap { Compilation.convert(from: $0) }
+			case .success(let model):
+				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
 				self?.view?.didReceivedMyCompilations(compilations: compilations)
 			case .failure:
 				guard self != nil else {
@@ -53,5 +59,17 @@ class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
 			fatalError()
 		}
 		return CompilationEditFactory.makeCompilationEditScreen(with: dependencies)
+	}
+
+	func createCompilationsListScreen(openCompilationScreen: @escaping  (Compilation) -> Void) -> CompilationsListViewController {
+		guard let dependencies = dependencies as? DependencyContainerProtocol else {
+			fatalError()
+		}
+		return CompilationsListFactory.makeCompilationsListScreen(
+			userId: userId,
+			with: dependencies,
+			didSelectCompilations: { _ in },
+			openCompilationScreen: openCompilationScreen
+		)
 	}
 }

@@ -14,16 +14,14 @@ class MainScreenFactory {
 		coordinator: MainScreenCoordinator
 	) -> MainScreenViewController {
 
-		let menu = MainMenuScreenFactory.makeMainMenuScreen(
-			with: dependencies,
-			delegate: coordinator
-		)
-		
+		let presenter = MainScreenPresenter()
+
 		let mapView = MapScreenFactory.makeMapScreen()
 
 		let viewController = MainScreenViewController(
+			presenter: presenter,
 			mapView: mapView,
-			menuView: menu
+			coordinator: coordinator
 		)
 
 		return viewController

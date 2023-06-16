@@ -38,6 +38,9 @@ class BigCompilationView: UIView {
 		return label
 	}()
 
+	private var storedCompilation: Compilation?
+	private var didTapCellCompletion: ((Compilation) -> Void)?
+
 	init() {
 		super.init(frame: .zero)
 		setupLayout()
@@ -83,5 +86,18 @@ class BigCompilationView: UIView {
 		self.gradient = nil
 		self.gradient = collectionAvatarImage.addGradient(colors: gradient)
 		collectionAvatarImage.bringSubviewToFront(collectionAvatarLabel)
+	}
+
+	func storeCompilation(_ compilation: Compilation, didTapCellCompletion: @escaping (Compilation) -> Void) {
+		storedCompilation = compilation
+		self.didTapCellCompletion = didTapCellCompletion
+		addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCell)))
+	}
+
+	@objc private func didTapCell() {
+		guard let completion = storedCompilation else {
+			return
+		}
+		didTapCellCompletion?(completion)
 	}
 }

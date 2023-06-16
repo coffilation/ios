@@ -1,51 +1,46 @@
 //
-//  DiscoveryPresenter.swift
+//  CompilationsListPresenter.swift
 //  coffilation
 //
-//  Created by Матвей Борисов on 18.05.2023.
+//  Created by Матвей Борисов on 12.06.2023.
 //
 
 import Foundation
-import UIKit
 
-protocol DiscoveryNavigationDelegate: AnyObject {}
-
-protocol DiscoveryPresenterProtocol {
-	func requestDiscovery(userId: Int)
-
-	func refreshAll()
+protocol CompilationsListPresenterProtocol {
+	func loadCompilations()
 
 	func loadMore()
 }
 
-class DiscoveryPresenter: DiscoveryPresenterProtocol {
-
+class CompilationsListPresenter: CompilationsListPresenterProtocol {
 	typealias Dependencies = HasCollectionNetworkManager
 
-	weak var view: DiscoveryViewProtocol?
-	weak var navigationDelegate: DiscoveryNavigationDelegate?
+	weak var view: CompilationsListViewProtocol?
 
 	private let dependencies: Dependencies
+	private let didSelectCompilations: (Set<Compilation>) -> Void
 
-	private var userId = 0
+	private var userId: Int
 	private var collectionsCount = 0
 	private var offset = 0
-	private var limit = 5
+	private var limit = 10
 
 	init(
-		navigationDelegate: DiscoveryNavigationDelegate? = nil,
-		dependencies: Dependencies
+		userId: Int,
+		dependencies: Dependencies,
+		didSelectCompilations: @escaping (Set<Compilation>) -> Void
 	) {
-		self.navigationDelegate = navigationDelegate
+		self.userId = userId
 		self.dependencies = dependencies
+		self.didSelectCompilations = didSelectCompilations
 	}
 
-	func requestDiscovery(userId: Int) {
-		self.userId = userId
+	func loadCompilations() {
 		collectionsCount = 0
 		offset = 0
-		limit = 5
-		dependencies.collectionNetworkManager.requestDiscoveryCompilations(
+		limit = 10
+		dependencies.collectionNetworkManager.requestUserCollections(
 			userId: userId,
 			limit: limit,
 			offset: offset
@@ -55,8 +50,8 @@ class DiscoveryPresenter: DiscoveryPresenterProtocol {
 				self?.collectionsCount = model.count
 				self?.offset += (self?.limit ?? 0)
 				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
-				let isEnd = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
-				self?.view?.didReceivedDiscovery(isEnd: isEnd, compilations: compilations)
+				let isLoadAll = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
+				self?.view?.didReceivedCompilations(isLoadAll: isLoadAll, compilations: compilations)
 			case .failure:
 				guard self != nil else {
 					fatalError()
@@ -66,15 +61,8 @@ class DiscoveryPresenter: DiscoveryPresenterProtocol {
 		}
 	}
 
-	func refreshAll() {
-		collectionsCount = 0
-		offset = 0
-		limit = 5
-		requestDiscovery(userId: userId)
-	}
-
 	func loadMore() {
-		dependencies.collectionNetworkManager.requestDiscoveryCompilations(
+		dependencies.collectionNetworkManager.requestUserCollections(
 			userId: userId,
 			limit: limit,
 			offset: offset
@@ -85,8 +73,8 @@ class DiscoveryPresenter: DiscoveryPresenterProtocol {
 
 				self?.offset += (self?.limit ?? 0)
 				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
-				let isEnd = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
-				self?.view?.appendDiscovery(isEnd: isEnd, with: compilations)
+				let isLoadAll = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
+				self?.view?.appendCompilations(isLoadAll: isLoadAll, with: compilations)
 			case .failure:
 				guard self != nil else {
 					fatalError()

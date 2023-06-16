@@ -24,7 +24,8 @@ class MyCompilationsView: UIView {
 		case empty
 	}
 
-	private var presenter: MyCompilationsPresenterProtocol
+	private let presenter: MyCompilationsPresenterProtocol
+	private let openCompilationScreen: (Compilation) -> Void
 
 	private let compilationsLabel: UILabel = {
 		let label = UILabel()
@@ -87,15 +88,20 @@ class MyCompilationsView: UIView {
 
 	private var retryAction: (() -> Void)?
 
-	private var makeCompilationButtonAction: ((UIViewController) -> Void)?
+	private var showScreenCompletion: ((UIViewController) -> Void)?
 
-	init(presenter: MyCompilationsPresenterProtocol) {
+	init(
+		presenter: MyCompilationsPresenterProtocol,
+		openCompilationScreen: @escaping  (Compilation) -> Void
+	) {
 		self.presenter = presenter
+		self.openCompilationScreen = openCompilationScreen
 		super.init(frame: .zero)
 		setupLayout()
 
 		errorButton.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
 		createButton.addTarget(self, action: #selector(makeCompilationButtonTapped), for: .touchUpInside)
+		showMoreButton.addTarget(self, action: #selector(showMoreButtonTapped), for: .touchUpInside)
 	}
 
 	required init?(coder: NSCoder) {
@@ -129,7 +135,7 @@ class MyCompilationsView: UIView {
 		errorButton.autoSetDimension(.height, toSize: 48)
 
 		addSubview(loadingStack)
-		loadingStack.autoPinEdgesToSuperviewEdges(with: .init(top: 0, left: 16, bottom: 0, right: 16), excludingEdge: .top)
+		loadingStack.autoPinEdgesToSuperviewEdges(with: .init(top: 0, left: 16, bottom: 48 + 8, right: 16), excludingEdge: .top)
 		loadingStack.autoPinEdge(.top, to: .bottom, of: compilationsLabel, withOffset: 12)
 
 		addSubview(showMoreButton)
@@ -191,6 +197,9 @@ class MyCompilationsView: UIView {
 				description: compilation.description,
 				gradient: [compilation.gradient.startColor, compilation.gradient.endColor]
 			)
+			compilationView.storeCompilation(compilation) { [weak self] cellCompilation in
+				self?.openCompilationScreen(cellCompilation)
+			}
 			stack.addArrangedSubview(compilationView)
 		}
 		showMoreButton.isHidden = compilations.count <= 3
@@ -203,14 +212,18 @@ class MyCompilationsView: UIView {
 	}
 
 	@objc private func makeCompilationButtonTapped() {
-		makeCompilationButtonAction?(presenter.createCompilationEditScreen())
+		showScreenCompletion?(presenter.createCompilationEditScreen())
+	}
+
+	@objc private func showMoreButtonTapped() {
+		showScreenCompletion?(presenter.createCompilationsListScreen(openCompilationScreen: openCompilationScreen))
 	}
 }
 
 extension MyCompilationsView: MyCompilationsViewProtocol {
 	var showScreenAction: ((UIViewController) -> Void)? {
-		get { makeCompilationButtonAction }
-		set { makeCompilationButtonAction = newValue }
+		get { showScreenCompletion }
+		set { showScreenCompletion = newValue }
 	}
 
 	func loadMyCompilations(userId: Int) {

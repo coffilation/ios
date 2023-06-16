@@ -8,10 +8,14 @@
 import UIKit
 
 struct MainMenuScreenFactory {
-	static func makeMainMenuScreen(with dependencies: DependencyContainerProtocol, delegate: MainMenuNavigationDelegate?) -> MainMenuViewController {
+	static func makeMainMenuScreen(
+		with dependencies: DependencyContainerProtocol,
+		delegate: MainMenuNavigationDelegate?,
+		openCompilationScreen: @escaping  (Compilation) -> Void
+	) -> MainMenuViewController {
 		let presenter = MainMenuPresenter(navigationDelegate: delegate, dependencies: dependencies)
 		let discoveryView = DiscoveryFactory.makeDiscoveryModule(with: dependencies)
-		let myCompilationsView = MyCompilationsFactory.makeMyCompilationsModule(with: dependencies)
+		let myCompilationsView = MyCompilationsFactory.makeMyCompilationsModule(with: dependencies, openCompilationScreen: openCompilationScreen)
 		let menuView = MainMenuViewController(
 			presenter: presenter,
 			discoveryView: discoveryView,

@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-struct Compilation {
+struct Compilation: Hashable {
 
-	struct Gradient {
+	struct Gradient: Hashable {
 		let startColor: CGColor
 		let endColor: CGColor
 	}

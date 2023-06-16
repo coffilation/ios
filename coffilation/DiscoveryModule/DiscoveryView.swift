@@ -37,7 +37,7 @@ class DiscoveryView: UIView {
 		return label
 	}()
 
-	private let errorView = DiscoveryErrorView()
+	private let errorView = ErrorView(errorLabelText: "Не удалось загрузить находки :(", errorButtonText: "Попробовать снова")
 
 	private let loadingView = DiscoveryLoadingView()
 

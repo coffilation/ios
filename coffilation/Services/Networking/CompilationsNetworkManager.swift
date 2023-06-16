@@ -31,7 +31,7 @@ struct CompilationCreateRequestModel: Encodable {
 }
 
 protocol CompilationsNetworkManagerProtocol {
-	func requestUserCollections(for userId: Int, _ completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void)
+	func requestUserCollections(userId: Int, limit: Int, offset: Int, _ completion: @escaping (Result<CompilationsResponseModel, Error>) -> Void)
 
 	func requestDiscoveryCompilations(userId: Int, limit: Int, offset: Int, _ completion: @escaping (Result<CompilationsResponseModel, Error>) -> Void)
 
@@ -50,11 +50,12 @@ class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
 		self.networkManager = networkManager
 	}
 
-	func requestUserCollections(for userId: Int, _ completion: @escaping (Result<[CompilationResponseModel], Error>) -> Void) {
+	func requestUserCollections(userId: Int, limit: Int, offset: Int, _ completion: @escaping (Result<CompilationsResponseModel, Error>) -> Void) {
 		guard let request = RequestBuilder(path: "/compilations/")
 			.httpMethod(.get)
 			.queryItem(name: "compilationmembership__user", value: "\(userId)")
-			.queryItem(name: "limit", value: "20")
+			.queryItem(name: "limit", value: "\(limit)")
+			.queryItem(name: "offset", value: "\(offset)")
 			.httpHeader(name: "accept", value: "application/json")
 			.makeRequestForCofApi() else {
 			completion(.failure(InternalError.encodeError))
@@ -65,7 +66,7 @@ class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
 			DispatchQueue.main.async {
 				switch result {
 				case .success(let model):
-					completion(.success(model.results))
+					completion(.success(model))
 				case .failure(_):
 					completion(.failure(NetworkError.noResponse))
 				}

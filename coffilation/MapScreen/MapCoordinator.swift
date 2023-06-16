@@ -39,6 +39,8 @@ class MapCoordinator: Coordinator {
 }
 
 extension MapCoordinator: MainMenuNavigationDelegate {
+	func showSheetScreen(with viewController: UIViewController) {}
+
 	func showNewScreen(with viewController: UIViewController) {
 		navigationController.pushViewController(viewController, animated: true)
 	}

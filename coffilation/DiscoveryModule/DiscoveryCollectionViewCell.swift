@@ -47,9 +47,3 @@ class DiscoveryCollectionViewCell: UICollectionViewCell {
 		bringSubviewToFront(labelText)
 	}
 }
-
-extension UICollectionViewCell {
-	static var reuseIdentifier: String {
-		return NSStringFromClass(self)
-	}
-}

@@ -1,21 +1,19 @@
 //
-//  DiscoveryErrorView.swift
+//  ErrorView.swift
 //  coffilation
 //
-//  Created by Матвей Борисов on 18.05.2023.
+//  Created by Матвей Борисов on 13.06.2023.
 //
 
 import UIKit
-import PureLayout
 
-class DiscoveryErrorView: UIView {
+class ErrorView: UIView {
 
 	var retryAction: (() -> Void)?
 
 	private let errorLabel: UILabel = {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-		label.text = "Не удалось загрузить находки :("
 		label.textAlignment = .center
 		label.numberOfLines = 0
 		return label
@@ -27,14 +25,15 @@ class DiscoveryErrorView: UIView {
 		configuration.imagePadding = 8
 		button.configuration = configuration
 		button.tintColor = .mainColor
-		button.setTitle("Попробовать снова", for: .normal)
 		button.setTitleColor(.mainColor, for: .normal)
 		button.setImage(CoffilationImage.refresh?.withRenderingMode(.alwaysTemplate), for: .normal)
 		return button
 	}()
 
-	init() {
+	init(errorLabelText: String, errorButtonText: String) {
 		super.init(frame: .zero)
+		errorLabel.text = errorLabelText
+		retryButton.setTitle(errorButtonText, for: .normal)
 		retryButton.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
 		setupLayout()
 	}
@@ -50,6 +49,7 @@ class DiscoveryErrorView: UIView {
 		errorLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 48)
 
 		addSubview(retryButton)
+		retryButton.autoPinEdge(.top, to: .bottom, of: errorLabel, withOffset: 16)
 		retryButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20)
 		retryButton.autoSetDimension(.height, toSize: 40)
 		retryButton.autoAlignAxis(toSuperviewAxis: .vertical)

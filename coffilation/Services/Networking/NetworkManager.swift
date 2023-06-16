@@ -50,6 +50,7 @@ class NetworkManager: NetworkManagerProtocol {
 				completion(.success(responseObject))
 			} catch {
 				print(error)
+				print(String(data: data, encoding: .utf8) ?? "")
 				completion(.failure(NetworkError.decodeFailure(data)))
 			}
 		}

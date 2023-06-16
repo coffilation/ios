@@ -14,7 +14,6 @@
 		A61505E82A16B338008BDBBE /* DiscoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505E72A16B338008BDBBE /* DiscoveryPresenter.swift */; };
 		A61505EA2A16B360008BDBBE /* DiscoveryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505E92A16B360008BDBBE /* DiscoveryFactory.swift */; };
 		A61505ED2A16BA5E008BDBBE /* DiscoveryLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505EC2A16BA5E008BDBBE /* DiscoveryLoadingView.swift */; };
-		A61505EF2A16BC37008BDBBE /* DiscoveryErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505EE2A16BC37008BDBBE /* DiscoveryErrorView.swift */; };
 		A61505F12A16EF5F008BDBBE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505F02A16EF5F008BDBBE /* Errors.swift */; };
 		A61505F32A179CF9008BDBBE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505F22A179CF9008BDBBE /* UserModel.swift */; };
 		A61505F52A179DC0008BDBBE /* CompilationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61505F42A179DC0008BDBBE /* CompilationModel.swift */; };
@@ -31,10 +30,27 @@
 		A639396B2A1954FD00E0C8E3 /* CompilationEditFormCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A639396A2A1954FD00E0C8E3 /* CompilationEditFormCollectionCell.swift */; };
 		A639396D2A19554D00E0C8E3 /* ColorSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A639396C2A19554D00E0C8E3 /* ColorSelectView.swift */; };
 		A63D7D412A363B3300D021F9 /* HorizontalPaginationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D402A363B3300D021F9 /* HorizontalPaginationManager.swift */; };
+		A63D7D442A37B17800D021F9 /* CompilationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D432A37B17800D021F9 /* CompilationsListViewController.swift */; };
+		A63D7D462A37B18300D021F9 /* CompilationsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D452A37B18300D021F9 /* CompilationsListPresenter.swift */; };
+		A63D7D482A37B1A600D021F9 /* CompilationsListFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D472A37B1A600D021F9 /* CompilationsListFactory.swift */; };
+		A63D7D4B2A37D60F00D021F9 /* LoadingReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D4A2A37D60F00D021F9 /* LoadingReusableView.swift */; };
+		A63D7D4D2A37D76500D021F9 /* CompilationsListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D4C2A37D76500D021F9 /* CompilationsListCollectionCell.swift */; };
+		A63D7D4F2A37DCFD00D021F9 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63D7D4E2A37DCFD00D021F9 /* ErrorView.swift */; };
 		A64BB06728D68EE5002D8435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BB06628D68EE5002D8435 /* AppDelegate.swift */; };
 		A64BB06928D68EE5002D8435 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BB06828D68EE5002D8435 /* SceneDelegate.swift */; };
 		A64BB07028D68EE6002D8435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A64BB06F28D68EE6002D8435 /* Assets.xcassets */; };
 		A64BB07328D68EE6002D8435 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64BB07128D68EE6002D8435 /* LaunchScreen.storyboard */; };
+		A64BF3E42A3928C400FDAC7C /* CompilationOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3E32A3928C400FDAC7C /* CompilationOnMapViewController.swift */; };
+		A64BF3E62A3928CE00FDAC7C /* CompilationOnMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3E52A3928CE00FDAC7C /* CompilationOnMapPresenter.swift */; };
+		A64BF3E82A3928D300FDAC7C /* CompilationOnMapFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3E72A3928D300FDAC7C /* CompilationOnMapFactory.swift */; };
+		A64BF3EA2A3928EF00FDAC7C /* CompilationOnMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3E92A3928EF00FDAC7C /* CompilationOnMapDelegate.swift */; };
+		A64BF3F02A3A832700FDAC7C /* PlacesCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3EF2A3A832700FDAC7C /* PlacesCollectionViewFlowLayout.swift */; };
+		A64BF3F22A3A83EA00FDAC7C /* PlacesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3F12A3A83EA00FDAC7C /* PlacesCollectionViewCell.swift */; };
+		A64BF3F42A3A89E500FDAC7C /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3F32A3A89E500FDAC7C /* Place.swift */; };
+		A64BF3F62A3A9D4700FDAC7C /* PlacesNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3F52A3A9D4700FDAC7C /* PlacesNetworkManager.swift */; };
+		A64BF3F92A3B459E00FDAC7C /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3F82A3B459E00FDAC7C /* PlaceAnnotation.swift */; };
+		A64BF3FB2A3B46AA00FDAC7C /* PlaceMarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3FA2A3B46AA00FDAC7C /* PlaceMarkerAnnotationView.swift */; };
+		A64BF3FD2A3B46DE00FDAC7C /* PlaceClusterAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64BF3FC2A3B46DE00FDAC7C /* PlaceClusterAnnotation.swift */; };
 		A651E7ED2A17B51F002B6CAF /* MyCompilationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A651E7EC2A17B51F002B6CAF /* MyCompilationsView.swift */; };
 		A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69AA28F386570048CA15 /* DependencyContainer.swift */; };
 		A66A69AD28F3878B0048CA15 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66A69AC28F3878B0048CA15 /* AuthViewController.swift */; };
@@ -89,7 +105,6 @@
 		A61505E72A16B338008BDBBE /* DiscoveryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryPresenter.swift; sourceTree = "<group>"; };
 		A61505E92A16B360008BDBBE /* DiscoveryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryFactory.swift; sourceTree = "<group>"; };
 		A61505EC2A16BA5E008BDBBE /* DiscoveryLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryLoadingView.swift; sourceTree = "<group>"; };
-		A61505EE2A16BC37008BDBBE /* DiscoveryErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorView.swift; sourceTree = "<group>"; };
 		A61505F02A16EF5F008BDBBE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		A61505F22A179CF9008BDBBE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		A61505F42A179DC0008BDBBE /* CompilationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationModel.swift; sourceTree = "<group>"; };
@@ -106,12 +121,29 @@
 		A639396A2A1954FD00E0C8E3 /* CompilationEditFormCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationEditFormCollectionCell.swift; sourceTree = "<group>"; };
 		A639396C2A19554D00E0C8E3 /* ColorSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectView.swift; sourceTree = "<group>"; };
 		A63D7D402A363B3300D021F9 /* HorizontalPaginationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPaginationManager.swift; sourceTree = "<group>"; };
+		A63D7D432A37B17800D021F9 /* CompilationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationsListViewController.swift; sourceTree = "<group>"; };
+		A63D7D452A37B18300D021F9 /* CompilationsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationsListPresenter.swift; sourceTree = "<group>"; };
+		A63D7D472A37B1A600D021F9 /* CompilationsListFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationsListFactory.swift; sourceTree = "<group>"; };
+		A63D7D4A2A37D60F00D021F9 /* LoadingReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingReusableView.swift; sourceTree = "<group>"; };
+		A63D7D4C2A37D76500D021F9 /* CompilationsListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationsListCollectionCell.swift; sourceTree = "<group>"; };
+		A63D7D4E2A37DCFD00D021F9 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		A64BB06328D68EE5002D8435 /* coffilation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = coffilation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64BB06628D68EE5002D8435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A64BB06828D68EE5002D8435 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A64BB06F28D68EE6002D8435 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A64BB07228D68EE6002D8435 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A64BB07428D68EE6002D8435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A64BF3E32A3928C400FDAC7C /* CompilationOnMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationOnMapViewController.swift; sourceTree = "<group>"; };
+		A64BF3E52A3928CE00FDAC7C /* CompilationOnMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationOnMapPresenter.swift; sourceTree = "<group>"; };
+		A64BF3E72A3928D300FDAC7C /* CompilationOnMapFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationOnMapFactory.swift; sourceTree = "<group>"; };
+		A64BF3E92A3928EF00FDAC7C /* CompilationOnMapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilationOnMapDelegate.swift; sourceTree = "<group>"; };
+		A64BF3EF2A3A832700FDAC7C /* PlacesCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		A64BF3F12A3A83EA00FDAC7C /* PlacesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCollectionViewCell.swift; sourceTree = "<group>"; };
+		A64BF3F32A3A89E500FDAC7C /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		A64BF3F52A3A9D4700FDAC7C /* PlacesNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesNetworkManager.swift; sourceTree = "<group>"; };
+		A64BF3F82A3B459E00FDAC7C /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
+		A64BF3FA2A3B46AA00FDAC7C /* PlaceMarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarkerAnnotationView.swift; sourceTree = "<group>"; };
+		A64BF3FC2A3B46DE00FDAC7C /* PlaceClusterAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceClusterAnnotation.swift; sourceTree = "<group>"; };
 		A651E7EC2A17B51F002B6CAF /* MyCompilationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCompilationsView.swift; sourceTree = "<group>"; };
 		A66A69AA28F386570048CA15 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		A66A69AC28F3878B0048CA15 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +227,6 @@
 				A61505E72A16B338008BDBBE /* DiscoveryPresenter.swift */,
 				A61505E92A16B360008BDBBE /* DiscoveryFactory.swift */,
 				A61505EC2A16BA5E008BDBBE /* DiscoveryLoadingView.swift */,
-				A61505EE2A16BC37008BDBBE /* DiscoveryErrorView.swift */,
 			);
 			path = DiscoveryModule;
 			sourceTree = "<group>";
@@ -225,6 +256,26 @@
 			path = CompilationEditScreen;
 			sourceTree = "<group>";
 		};
+		A63D7D422A37B14C00D021F9 /* CompilationsListScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A63D7D432A37B17800D021F9 /* CompilationsListViewController.swift */,
+				A63D7D452A37B18300D021F9 /* CompilationsListPresenter.swift */,
+				A63D7D4C2A37D76500D021F9 /* CompilationsListCollectionCell.swift */,
+				A63D7D472A37B1A600D021F9 /* CompilationsListFactory.swift */,
+			);
+			path = CompilationsListScreen;
+			sourceTree = "<group>";
+		};
+		A63D7D492A37D5F800D021F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A63D7D4E2A37DCFD00D021F9 /* ErrorView.swift */,
+				A63D7D4A2A37D60F00D021F9 /* LoadingReusableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A64BB05A28D68EE5002D8435 = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +297,8 @@
 		A64BB06528D68EE5002D8435 /* coffilation */ = {
 			isa = PBXGroup;
 			children = (
+				A64BF3E22A3928AA00FDAC7C /* CompilationOnMapScreen */,
+				A63D7D422A37B14C00D021F9 /* CompilationsListScreen */,
 				A63939632A18F3D300E0C8E3 /* CompilationEditScreen */,
 				A61505EB2A16B570008BDBBE /* MyCompilationsModule */,
 				A61505E42A16B311008BDBBE /* DiscoveryModule */,
@@ -260,9 +313,34 @@
 			path = coffilation;
 			sourceTree = "<group>";
 		};
+		A64BF3E22A3928AA00FDAC7C /* CompilationOnMapScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A64BF3E32A3928C400FDAC7C /* CompilationOnMapViewController.swift */,
+				A64BF3F12A3A83EA00FDAC7C /* PlacesCollectionViewCell.swift */,
+				A64BF3EF2A3A832700FDAC7C /* PlacesCollectionViewFlowLayout.swift */,
+				A64BF3F32A3A89E500FDAC7C /* Place.swift */,
+				A64BF3E52A3928CE00FDAC7C /* CompilationOnMapPresenter.swift */,
+				A64BF3E72A3928D300FDAC7C /* CompilationOnMapFactory.swift */,
+				A64BF3E92A3928EF00FDAC7C /* CompilationOnMapDelegate.swift */,
+			);
+			path = CompilationOnMapScreen;
+			sourceTree = "<group>";
+		};
+		A64BF3F72A3B455D00FDAC7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A64BF3F82A3B459E00FDAC7C /* PlaceAnnotation.swift */,
+				A64BF3FA2A3B46AA00FDAC7C /* PlaceMarkerAnnotationView.swift */,
+				A64BF3FC2A3B46DE00FDAC7C /* PlaceClusterAnnotation.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A698A1EB29296A1F00DEE788 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A63D7D492A37D5F800D021F9 /* Views */,
 				A61505E12A16B173008BDBBE /* Models */,
 				A6BE7E4129D3A1A20048838B /* Tools */,
 				A64BB06628D68EE5002D8435 /* AppDelegate.swift */,
@@ -320,6 +398,7 @@
 				A66A69BA28FC19590048CA15 /* RequestBuilder.swift */,
 				A698A20A2933A13200DEE788 /* UserNetworkManager.swift */,
 				A698A20C2933A13C00DEE788 /* CompilationsNetworkManager.swift */,
+				A64BF3F52A3A9D4700FDAC7C /* PlacesNetworkManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -338,6 +417,7 @@
 		A698A1F1292973A900DEE788 /* MapScreen */ = {
 			isa = PBXGroup;
 			children = (
+				A64BF3F72A3B455D00FDAC7C /* Views */,
 				A698A1F2292973BE00DEE788 /* MapCoordinator.swift */,
 				A698A1F4292973C800DEE788 /* MapScreenFactory.swift */,
 				A698A1F6292973DB00DEE788 /* MapViewController.swift */,
@@ -539,18 +619,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A63D7D462A37B18300D021F9 /* CompilationsListPresenter.swift in Sources */,
 				A698A20D2933A13C00DEE788 /* CompilationsNetworkManager.swift in Sources */,
+				A63D7D442A37B17800D021F9 /* CompilationsListViewController.swift in Sources */,
+				A64BF3E62A3928CE00FDAC7C /* CompilationOnMapPresenter.swift in Sources */,
+				A64BF3E82A3928D300FDAC7C /* CompilationOnMapFactory.swift in Sources */,
 				A6BE7E4329D3A1BA0048838B /* AtomicPropertyWrapper.swift in Sources */,
+				A63D7D4D2A37D76500D021F9 /* CompilationsListCollectionCell.swift in Sources */,
 				A698A1FB2932568800DEE788 /* UIView+Extension.swift in Sources */,
 				A698A2102935C04900DEE788 /* DiscoveryCollectionViewCell.swift in Sources */,
 				A6BE7E4629D3B0080048838B /* SplashScreenViewController.swift in Sources */,
+				A63D7D482A37B1A600D021F9 /* CompilationsListFactory.swift in Sources */,
 				A66A69BD28FC1B2F0048CA15 /* NetworkManager.swift in Sources */,
 				A6B58782290749590096BE78 /* TokenProvider.swift in Sources */,
 				A63939652A18F47800E0C8E3 /* CompilationEditViewController.swift in Sources */,
 				A66A69AB28F386570048CA15 /* DependencyContainer.swift in Sources */,
+				A63D7D4F2A37DCFD00D021F9 /* ErrorView.swift in Sources */,
 				A6BD7D1329E19E0400C1DE29 /* MainScreenViewController.swift in Sources */,
 				A698A1F7292973DB00DEE788 /* MapViewController.swift in Sources */,
 				A698A2122935C07500DEE788 /* MyCompilationTableViewCell.swift in Sources */,
+				A64BF3FD2A3B46DE00FDAC7C /* PlaceClusterAnnotation.swift in Sources */,
 				A698A20929338C7300DEE788 /* SkeletonImageView.swift in Sources */,
 				A66A69B328F4BF690048CA15 /* AuthManager.swift in Sources */,
 				A639395E2A17FF3000E0C8E3 /* Collection+Extension.swift in Sources */,
@@ -564,15 +652,19 @@
 				A63939582A17BABA00E0C8E3 /* BigCompilationView.swift in Sources */,
 				A639395A2A17FC9900E0C8E3 /* BigCompilationLoadingView.swift in Sources */,
 				A63939622A18203A00E0C8E3 /* MyCompilationsFactory.swift in Sources */,
+				A64BF3F92A3B459E00FDAC7C /* PlaceAnnotation.swift in Sources */,
+				A63D7D4B2A37D60F00D021F9 /* LoadingReusableView.swift in Sources */,
 				A6BE7E4829D3B0120048838B /* SplashScreenPresenter.swift in Sources */,
 				A639395C2A17FEA300E0C8E3 /* String+Extension.swift in Sources */,
 				A698A1F9292973F300DEE788 /* MapPresenter.swift in Sources */,
+				A64BF3FB2A3B46AA00FDAC7C /* PlaceMarkerAnnotationView.swift in Sources */,
 				A698A2042932586400DEE788 /* MainMenuCoordinator.swift in Sources */,
 				A61505F72A179F7B008BDBBE /* UIColor+Extension.swift in Sources */,
 				A66A69AD28F3878B0048CA15 /* AuthViewController.swift in Sources */,
 				A651E7ED2A17B51F002B6CAF /* MyCompilationsView.swift in Sources */,
 				A61505ED2A16BA5E008BDBBE /* DiscoveryLoadingView.swift in Sources */,
 				A698A1FE2932577E00DEE788 /* MainMenuViewController.swift in Sources */,
+				A64BF3E42A3928C400FDAC7C /* CompilationOnMapViewController.swift in Sources */,
 				A61505F32A179CF9008BDBBE /* UserModel.swift in Sources */,
 				A61505E82A16B338008BDBBE /* DiscoveryPresenter.swift in Sources */,
 				A698A2002932579A00DEE788 /* MainMenuPresenter.swift in Sources */,
@@ -583,16 +675,20 @@
 				A698A2062932676100DEE788 /* MapBottomSheetDataSource.swift in Sources */,
 				A6BD7D0F29E19C5D00C1DE29 /* MainScreenCoordinator.swift in Sources */,
 				A61505E32A16B190008BDBBE /* EmptyModel.swift in Sources */,
+				A64BF3EA2A3928EF00FDAC7C /* CompilationOnMapDelegate.swift in Sources */,
 				A698A1F3292973BE00DEE788 /* MapCoordinator.swift in Sources */,
 				A66A69B928F4C19C0048CA15 /* AuthCoordinator.swift in Sources */,
 				A64BB06728D68EE5002D8435 /* AppDelegate.swift in Sources */,
 				A698A202293257C900DEE788 /* MainMenuScreenFactory.swift in Sources */,
+				A64BF3F42A3A89E500FDAC7C /* Place.swift in Sources */,
 				A6BE7E4C29D3B02D0048838B /* SplashScreenFactory.swift in Sources */,
 				A61505EA2A16B360008BDBBE /* DiscoveryFactory.swift in Sources */,
 				A68F205C2A13EBE100355021 /* RegisterManager.swift in Sources */,
 				A639396D2A19554D00E0C8E3 /* ColorSelectView.swift in Sources */,
 				A61505E62A16B32B008BDBBE /* DiscoveryView.swift in Sources */,
 				A698A20B2933A13200DEE788 /* UserNetworkManager.swift in Sources */,
+				A64BF3F62A3A9D4700FDAC7C /* PlacesNetworkManager.swift in Sources */,
+				A64BF3F02A3A832700FDAC7C /* PlacesCollectionViewFlowLayout.swift in Sources */,
 				A66A69BB28FC19590048CA15 /* RequestBuilder.swift in Sources */,
 				A63939602A181AF200E0C8E3 /* MyCompilationsPresenter.swift in Sources */,
 				A6BD7D0D29E19C5400C1DE29 /* MainScreenPresenter.swift in Sources */,
@@ -602,9 +698,9 @@
 				A64BB06928D68EE5002D8435 /* SceneDelegate.swift in Sources */,
 				A6B58784290CA1E70096BE78 /* TokenManager.swift in Sources */,
 				A698A1EA2929663A00DEE788 /* UITextField+Extension.swift in Sources */,
+				A64BF3F22A3A83EA00FDAC7C /* PlacesCollectionViewCell.swift in Sources */,
 				A6BD7D1129E19C7A00C1DE29 /* MainScreenFactory.swift in Sources */,
 				A63939672A18F48100E0C8E3 /* CompilationEditPresenter.swift in Sources */,
-				A61505EF2A16BC37008BDBBE /* DiscoveryErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
