@@ -54,7 +54,7 @@ class DiscoveryPresenter: DiscoveryPresenterProtocol {
 			case .success(let model):
 				self?.collectionsCount = model.count
 				self?.offset += (self?.limit ?? 0)
-				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
+				let compilations = model.results.compactMap { Compilation.convert(from: $0, isJoin: false) }
 				let isEnd = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
 				self?.view?.didReceivedDiscovery(isEnd: isEnd, compilations: compilations)
 			case .failure:
@@ -84,7 +84,7 @@ class DiscoveryPresenter: DiscoveryPresenterProtocol {
 				self?.collectionsCount = model.count
 
 				self?.offset += (self?.limit ?? 0)
-				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
+				let compilations = model.results.compactMap { Compilation.convert(from: $0, isJoin: false) }
 				let isEnd = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
 				self?.view?.appendDiscovery(isEnd: isEnd, with: compilations)
 			case .failure:

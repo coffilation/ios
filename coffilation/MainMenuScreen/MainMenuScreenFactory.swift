@@ -14,7 +14,7 @@ struct MainMenuScreenFactory {
 		openCompilationScreen: @escaping  (Compilation) -> Void
 	) -> MainMenuViewController {
 		let presenter = MainMenuPresenter(navigationDelegate: delegate, dependencies: dependencies)
-		let discoveryView = DiscoveryFactory.makeDiscoveryModule(with: dependencies)
+		let discoveryView = DiscoveryFactory.makeDiscoveryModule(with: dependencies, openCompilationScreen: openCompilationScreen)
 		let myCompilationsView = MyCompilationsFactory.makeMyCompilationsModule(with: dependencies, openCompilationScreen: openCompilationScreen)
 		let menuView = MainMenuViewController(
 			presenter: presenter,

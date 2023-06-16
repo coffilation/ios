@@ -109,10 +109,13 @@ class CompilationOnMapViewController: UIViewController {
 		loadPlaces()
 		delegate?.configureNavigationBar(title: compilation.name, backAction: { [weak self] in
 			self?.dismiss(
-			animated: true,
-			completion: {
-				self?.didCloseCompletion()
-			})
+				animated: true,
+				completion: {
+					self?.didCloseCompletion()
+				})
+		}, joinAction: compilation.isJoin ? nil : { [weak self] in
+			guard let compilation = self?.compilation else { return }
+			self?.presenter.joinInCollection(compilationId: compilation.id)
 		})
 	}
 

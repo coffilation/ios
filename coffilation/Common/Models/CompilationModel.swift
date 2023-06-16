@@ -21,8 +21,9 @@ struct Compilation: Hashable {
 	let isPrivate: Bool
 	let owner: User
 	var gradient: Gradient
+	let isJoin: Bool
 
-	static func convert(from rawCompilation: CompilationResponseModel) -> Compilation {
+	static func convert(from rawCompilation: CompilationResponseModel, isJoin: Bool) -> Compilation {
 		let gradient: Gradient = {
 			if let startHexColor = rawCompilation.primaryColor,
 			   let endHexColor = rawCompilation.secondaryColor,
@@ -40,7 +41,8 @@ struct Compilation: Hashable {
 			description: rawCompilation.description,
 			isPrivate: rawCompilation.isPrivate,
 			owner: rawCompilation.owner,
-			gradient: gradient
+			gradient: gradient,
+			isJoin: isJoin
 		)
 	}
 }

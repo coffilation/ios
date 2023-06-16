@@ -27,6 +27,8 @@ class DiscoveryView: UIView {
 
 	private var discoveryCollections = [Compilation]()
 
+	private let openCompilationScreen: (Compilation) -> Void
+
 	private let contentContainer = UIView()
 
 	private let discoveryLabel: UILabel = {
@@ -62,8 +64,9 @@ class DiscoveryView: UIView {
 
 	private var paginationCompletion: (() -> Void)?
 
-	init(presenter: DiscoveryPresenterProtocol) {
+	init(presenter: DiscoveryPresenterProtocol, openCompilationScreen: @escaping (Compilation) -> Void) {
 		self.presenter = presenter
+		self.openCompilationScreen = openCompilationScreen
 		super.init(frame: .zero)
 		discoveryCollectionView.delegate = self
 		discoveryCollectionView.dataSource = self
@@ -192,6 +195,10 @@ extension DiscoveryView: UICollectionViewDataSource {
 		minimumInteritemSpacingForSectionAt section: Int
 	) -> CGFloat {
 		return 8
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		openCompilationScreen(discoveryCollections[indexPath.row])
 	}
 }
 

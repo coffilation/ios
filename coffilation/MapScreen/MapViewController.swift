@@ -175,7 +175,8 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: CompilationOnMapDelegate {
-	func configureNavigationBar(title: String, backAction: @escaping () -> Void) {
+
+	func configureNavigationBar(title: String, backAction: @escaping () -> Void, joinAction: (() -> Void)?) {
 		let backItem = UIBarButtonItem(title: "", image: UIImage(systemName: "arrow.backward"), primaryAction: UIAction(handler: { _ in
 			self.navigationController?.setNavigationBarHidden(true, animated: true)
 			backAction()
@@ -184,6 +185,15 @@ extension MapViewController: CompilationOnMapDelegate {
 		navigationController?.setNavigationBarHidden(false, animated: true)
 		navigationController?.navigationBar.topItem?.title = title
 		self.navigationController?.navigationBar.topItem?.leftBarButtonItem = backItem
+
+		guard let joinAction else {
+			return
+		}
+		let joinItem = UIBarButtonItem(title: "", image: UIImage(systemName: "person.badge.plus"), primaryAction: UIAction(handler: { _ in
+			joinAction()
+			self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+		}), menu: nil)
+		self.navigationController?.navigationBar.topItem?.rightBarButtonItem = joinItem
 	}
 
 	var viewBox: [CLLocationCoordinate2D] {

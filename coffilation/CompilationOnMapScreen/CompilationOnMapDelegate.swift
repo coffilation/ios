@@ -17,5 +17,5 @@ protocol CompilationOnMapDelegate: AnyObject {
 
 	func addPointsOnMap(places: [Place], color: UIColor)
 
-	func configureNavigationBar(title: String, backAction: @escaping () -> Void)
+	func configureNavigationBar(title: String, backAction: @escaping () -> Void, joinAction: (() -> Void)?)
 }

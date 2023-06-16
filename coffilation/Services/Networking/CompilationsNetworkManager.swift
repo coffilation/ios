@@ -30,6 +30,10 @@ struct CompilationCreateRequestModel: Encodable {
 	let description: String?
 }
 
+struct CompilationJoinRequestModel: Encodable {
+	let compilation: Int
+}
+
 protocol CompilationsNetworkManagerProtocol {
 	func requestUserCollections(userId: Int, limit: Int, offset: Int, _ completion: @escaping (Result<CompilationsResponseModel, Error>) -> Void)
 
@@ -39,6 +43,8 @@ protocol CompilationsNetworkManagerProtocol {
 		data: CompilationCreateRequestModel,
 		_ completion: @escaping (Result<CompilationResponseModel, Error>) -> Void
 	)
+
+	func joinInCollection(data: CompilationJoinRequestModel, _ completion: @escaping (Result<EmptyModel, Error>) -> Void)
 }
 
 class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
@@ -111,10 +117,32 @@ class CompilationsNetworkManager: CompilationsNetworkManagerProtocol {
 		else {
 			return
 		}
-		print(request.description)
 		guard let data = request.httpBody else { return }
-		print(String(decoding: data, as: UTF8.self))
 		authManager.authorizedRequest(with: request) { (result: Result<CompilationResponseModel, Error>) in
+			DispatchQueue.main.async {
+				switch result {
+				case .success(let model):
+					completion(.success(model))
+				case .failure(_):
+					completion(.failure(NetworkError.noResponse))
+				}
+			}
+		}
+	}
+
+	func joinInCollection(data: CompilationJoinRequestModel, _ completion: @escaping (Result<EmptyModel, Error>) -> Void) {
+		guard let request = try? RequestBuilder(path: "/compilation_memberships/")
+			.httpMethod(.post)
+			.httpHeader(name: "accept", value: "application/json")
+			.httpHeader(name: "Content-Type", value: "application/json")
+			.httpJSONBody(data)
+			.makeRequestForCofApi()
+		else {
+			return
+		}
+
+		guard let data = request.httpBody else { return }
+		authManager.authorizedRequest(with: request) { (result: Result<EmptyModel, Error>) in
 			DispatchQueue.main.async {
 				switch result {
 				case .success(let model):

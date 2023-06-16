@@ -49,7 +49,7 @@ class CompilationsListPresenter: CompilationsListPresenterProtocol {
 			case .success(let model):
 				self?.collectionsCount = model.count
 				self?.offset += (self?.limit ?? 0)
-				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
+				let compilations = model.results.compactMap { Compilation.convert(from: $0, isJoin: true) }
 				let isLoadAll = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
 				self?.view?.didReceivedCompilations(isLoadAll: isLoadAll, compilations: compilations)
 			case .failure:
@@ -72,7 +72,7 @@ class CompilationsListPresenter: CompilationsListPresenterProtocol {
 				self?.collectionsCount = model.count
 
 				self?.offset += (self?.limit ?? 0)
-				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
+				let compilations = model.results.compactMap { Compilation.convert(from: $0, isJoin: true) }
 				let isLoadAll = (self?.offset ?? 0) >= (self?.collectionsCount ?? 0)
 				self?.view?.appendCompilations(isLoadAll: isLoadAll, with: compilations)
 			case .failure:

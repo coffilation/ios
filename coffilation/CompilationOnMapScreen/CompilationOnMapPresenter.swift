@@ -10,10 +10,12 @@ import CoreLocation
 
 protocol CompilationOnMapPresenterProtocol: AnyObject {
 	func requestPlaces(compilationId: Int, viewBox: [CLLocationCoordinate2D])
+
+	func joinInCollection(compilationId: Int)
 }
 
 class CompilationOnMapPresenter: CompilationOnMapPresenterProtocol {
-	typealias Dependencies = HasPlacesNetworkManager
+	typealias Dependencies = HasPlacesNetworkManager & HasCollectionNetworkManager
 
 	weak var view: CompilationOnMapViewProtocol?
 
@@ -36,5 +38,9 @@ class CompilationOnMapPresenter: CompilationOnMapPresenterProtocol {
 					self?.view?.didReceivedError()
 				}
 			}
+	}
+
+	func joinInCollection(compilationId: Int) {
+		dependencies.collectionNetworkManager.joinInCollection(data: CompilationJoinRequestModel(compilation: compilationId)) { _ in }
 	}
 }

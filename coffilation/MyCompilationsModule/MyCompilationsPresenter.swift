@@ -43,7 +43,7 @@ class MyCompilationsPresenter: MyCompilationsPresenterProtocol {
 		) { [weak self] (result: Result<CompilationsResponseModel, Error>) in
 			switch result {
 			case .success(let model):
-				let compilations = model.results.compactMap { Compilation.convert(from: $0) }
+				let compilations = model.results.compactMap { Compilation.convert(from: $0, isJoin: true) }
 				self?.view?.didReceivedMyCompilations(compilations: compilations)
 			case .failure:
 				guard self != nil else {
